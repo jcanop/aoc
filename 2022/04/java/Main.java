@@ -41,8 +41,11 @@ public class Main {
 		 * @return A boolean
 		 */
 		private boolean overlap(Range r) {
-			return (r.min >= this.min && r.min <= this.max) ||
-				(r.max >= this.min && r.max <= this.max);
+			return
+				(r.min >= this.min && r.min <= this.max) ||
+				(r.max >= this.min && r.max <= this.max) ||
+				(this.min >= r.min && this.min <= r.max) ||
+				(this.max >= r.min && this.max <= r.max);
 		}
 	}
 
@@ -64,7 +67,7 @@ public class Main {
 				String[] tokens = line.split(",");
 				Range r1 = new Range(tokens[0]);
 				Range r2 = new Range(tokens[1]);
-				return r1.overlap(r2) || r2.overlap(r1)? 1 : 0;
+				return r1.overlap(r2) ? 1 : 0;
 			}).sum();
 			System.out.format("Part 2. Total of ranges that overlaps: %,d%n", total);
 		}
