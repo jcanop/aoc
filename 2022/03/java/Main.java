@@ -16,11 +16,7 @@ public class Main {
 	 * @return The duplicated character.
 	 */
 	private static char findDuplicate(char[] a, char[] b) {
-		for (int i = 0; i < a.length; i++)
-			for (int j = 0; j < b.length; j++)
-				if (a[i] == b[j])
-					return a[i];
-		throw new RuntimeException("Duplicate char not found!");
+		return findDuplicate(a, b, null);
 	}
 
 	/**
@@ -34,10 +30,12 @@ public class Main {
 	private static char findDuplicate(char[] a, char[] b, char[] c) {
 		for (int i = 0; i < a.length; i++)
 			for (int j = 0; j < b.length; j++)
-				if (a[i] == b[j])
+				if (a[i] == b[j]) {
+					if (c == null) return a[i];
 					for (int k = 0; k < c.length; k++)
 						if (b[j] == c[k])
 							return c[k];
+				}
 		throw new RuntimeException("Duplicate char not found!");
 	}
 
