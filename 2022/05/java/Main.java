@@ -12,8 +12,8 @@ public class Main {
 	private static final Pattern stepsPattern = Pattern.compile("\\d+");
 
 	public static void main(String[] args) throws IOException {
-		List<List<Character>> queues1 = new ArrayList<>();;
-		List<List<Character>> queues2 = new ArrayList<>();;
+		List<List<Character>> queues1 = new ArrayList<>();
+		List<List<Character>> queues2 = new ArrayList<>();
 
 		boolean setup = true;
 		try (BufferedReader reader = new BufferedReader(new FileReader(INPUT_FILE))) {
