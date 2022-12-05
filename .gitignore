@@ -1,1 +1,6 @@
+# --- java ---
 *.class
+
+# --- rust ---
+**/target
+Cargo.lock
