@@ -46,7 +46,7 @@ reader.on("line", line => {
 		}
 
 		// --- Puzzle 2 ---
-			for (let i = count - 1; i >= 0; i--) {
+		for (let i = count - 1; i >= 0; i--) {
 			let crate = queues2[from].splice(i, 1)[0];
 			queues2[to].unshift(crate);
 		}
