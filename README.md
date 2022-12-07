@@ -12,4 +12,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 |  03 |[:white_check_mark:](2022/03/bash)|[:white_check_mark:](2022/03/java)|[:white_check_mark:](2022/03/javascript)| |[:white_check_mark:](2022/03/rust)|
 |  04 |[:white_check_mark:](2022/04/bash)|[:white_check_mark:](2022/04/java)|[:white_check_mark:](2022/04/javascript)| |[:white_check_mark:](2022/04/rust)|
 |  05 | |[:white_check_mark:](2022/05/java)|[:white_check_mark:](2022/05/javascript)| |[:white_check_mark:](2022/05/rust)|
-|  06 | |[:white_check_mark:](2022/06/java)| | | |
+|  06 | |[:white_check_mark:](2022/06/java)| | |[:white_check_mark:](2022/06/rust)|
