@@ -139,6 +139,6 @@ public class Main {
 		// --- Puzzle 2 ---
 		int need = UPDATE_SIZE - (DISK_SIZE - root.size);
 		int size = findDirToDelete(root, need);
-		System.out.format("2. The total size of the smalles directory needed is: %,d%n",  size);
+		System.out.format("2. The total size of the smalles directory needed is %,d%n",  size);
 	}
 }
