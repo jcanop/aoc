@@ -59,7 +59,7 @@ impl Node {
         Node { name, size, parent: Some(parent), childs: None }
     }
 
-	// This recursive method updates all the directories sizes according to their content.
+    // This recursive method updates all the directories sizes according to their content.
     fn update_dir_sizes(&mut self) {
         if let Some(childs) = &self.childs {
             for c in childs.values() {
@@ -71,7 +71,7 @@ impl Node {
         }
     }
 
-	// This recursive method searches all directories smaller in size than a limit.
+    // This recursive method searches all directories smaller in size than a limit.
     fn sum_small_dirs(&self, limit: usize) -> usize {
         let mut total: usize = 0;
         if let Some(childs) = &self.childs {
