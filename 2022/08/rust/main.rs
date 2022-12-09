@@ -27,7 +27,6 @@ fn is_visible(grid: &Grid, x: usize, y: usize) -> bool {
     unreachable!();
 }
 
-
 // Calculate scenic score of a tree.
 fn scenic_score(grid: &Grid, x: usize, y: usize) -> usize {
     let mut a = 1;
@@ -60,7 +59,6 @@ fn main() -> Result<(), std::io::Error> {
         let line = line.unwrap();
         line.chars().map(|c| c.to_digit(10).unwrap() as usize).collect()
     }).collect();
-
 
     // --- Puzzle 1 ---
     let mut total = (grid.len() + grid[0].len() - 2) * 2;
