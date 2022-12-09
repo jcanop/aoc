@@ -79,6 +79,6 @@ public class Main {
 				int score = scenicScore(grid, x, y);
 				if (score > max) max = score;
 			}
-		System.out.format("2. The highest scenic score is:  %,d%n", max);
+		System.out.format("2. The highest scenic score is: %,d%n", max);
 	}
 }
