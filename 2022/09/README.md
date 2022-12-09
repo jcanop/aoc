@@ -258,7 +258,7 @@ So, there are 13 positions the tail visited at least once.
 
 Simulate your complete hypothetical series of motions. **How many positions does the tail of the rope visit at least once?**
 
-## Part Two ---
+## Part Two
 
 A rope snaps! Suddenly, the river is getting a lot closer than you remember. The bridge is still there, but some of the ropes that broke are now whipping toward you as you fall through the air!
 
