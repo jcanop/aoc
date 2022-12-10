@@ -40,7 +40,7 @@ impl Knot {
 // Represents a Rope.
 struct Rope {
     list: Vec<Knot>,
-    trail: HashSet<String>
+    trail: HashSet<(isize, isize)>
 }
 
 impl Rope {
@@ -50,7 +50,7 @@ impl Rope {
             list.push(Knot::new());
         }
         let mut trail = HashSet::new();
-        trail.insert(String::from("0,0"));
+        trail.insert((0, 0));
         Rope { list, trail }
     }
 
@@ -72,7 +72,7 @@ impl Rope {
             self.list[n].y += dy.signum();
 
             if i == self.list.len() - 1 {
-                self.trail.insert(format!("{},{}", self.list[n].x, self.list[n].y));
+                self.trail.insert((self.list[n].x, self.list[n].y));
             }
         }
     }
