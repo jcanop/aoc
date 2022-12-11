@@ -90,7 +90,7 @@ public class Main {
 			int p = (cycle - 1) % 40;
 			char c = (p >= cpu.register - 1 && p <= cpu.register + 1) ? '#' : ' ';
 			sb.append(c);
-			if ((cycle + 0) % 40 == 0) sb.append('\n');
+			if (cycle % 40 == 0) sb.append('\n');
 
 			// --- Both ---
 			cycle++;
