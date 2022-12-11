@@ -33,7 +33,8 @@ for year in $(ls -rd */); do
 		day=${day%"/"}
 		echo -n "|  $day |"
 		for lang in "${LANGS[@]}"; do
-			if [ -d "$base/$year/$day/$lang" ]; then
+			dir="$base/$year/$day/$lang"
+			if [ -d "$dir" ] && [ -n "$(ls -A $dir)" ]; then
 				echo -n "[$OK]($year/$day/$lang)"
 			else
 				echo -n "${NO}"
