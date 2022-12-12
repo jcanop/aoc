@@ -18,6 +18,7 @@ public class Monkey {
 	private final int relief;
 	private final List<Monkey> group;
 	private int inspects;
+	private long gcd;
 
 	/**
 	 * Creates a new Monkey.
@@ -43,6 +44,7 @@ public class Monkey {
 		this.relief = relief;
 		this.group = group;
 		this.inspects = 0;
+		this.gcd = 0;
 	}
 
 	private void receive(long item) {
@@ -62,9 +64,10 @@ public class Monkey {
 			if (relief == 1) {
 				item /= 3;
 			} else if (relief == 2) {
-				long module = group.stream().mapToLong(m -> m.divisible)
+				if (gcd == 0) gcd = group.stream()
+					.mapToLong(m -> m.divisible)
 					.reduce(1L, (a, b) -> a * b);
-				item %= module;
+				item %= gcd;
 			} else {
 				throw new RuntimeException("Usupported relief: " + relief);
 			}
