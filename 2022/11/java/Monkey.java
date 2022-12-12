@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+/**
+ * Represents a Monkey in the game.
+ */
 public class Monkey {
 	private final int id;
 	private final List<Long> items;
@@ -16,6 +19,19 @@ public class Monkey {
 	private final List<Monkey> group;
 	private int inspects;
 
+	/**
+	 * Creates a new Monkey.
+	 *
+	 * @param id Monkey's ID.
+	 * @param items Initial items owned by the moneky.
+	 * @param operator Inspect's operator.
+	 * @param operand Inspect's operand.
+	 * @param divisible Test's operand.
+	 * @param throwTrue Monkey to throw the item if test result is true.
+	 * @param throwFalse Monkey to throw the item if test result is false.
+	 * @param relief Type of relief per inspection. 1 or 2 depending the part of the puzzle.
+	 * @param group The group of monkeys playing.
+	 */
 	public Monkey(int id, long[] items, char operator, Integer operand, int divisible, int throwTrue, int throwFalse, int relief, List<Monkey> group) {
 		this.id = id;
 		this.items = LongStream.of(items).boxed().collect(Collectors.toCollection(ArrayList::new));
@@ -47,7 +63,6 @@ public class Monkey {
 				item /= 3;
 			} else if (relief == 2) {
 				long module = group.stream().mapToLong(m -> m.divisible)
-					.boxed()
 					.reduce(1L, (a, b) -> a * b);
 				item %= module;
 			} else {
