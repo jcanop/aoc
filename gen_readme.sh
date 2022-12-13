@@ -31,7 +31,7 @@ for year in $(ls -rd */); do
 	pushd $year > /dev/null
 	for day in $(ls -d */); do
 		day=${day%"/"}
-		echo -n "|  $day |"
+		echo -n "| [$day]($year/$day) |"
 		for lang in "${LANGS[@]}"; do
 			dir="$base/$year/$day/$lang"
 			if [ -d "$dir" ] && [ -n "$(ls -A $dir)" ]; then
