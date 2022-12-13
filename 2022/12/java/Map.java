@@ -103,7 +103,7 @@ public class Map {
 				if (grid[y][x] == 'a') {
 					start = new Point(x, y);
 					List<Point> path = findPath();
-					if (path.size() > 0) list.add(findPath());
+					if (path.size() > 0) list.add(path);
 				}
 			}
 		}
