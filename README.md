@@ -4,6 +4,9 @@
 
 The repository is organized by year and then by day. Each day, there is a copy of the two parts puzzle and their solutions in various programming languages.
 
+## git_hooks
+| Day | bash | java | javascript | python | rust |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 ## 2022
 | Day | bash | java | javascript | python | rust |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -19,4 +22,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [10](2022/10) | |[:white_check_mark:](2022/10/java)| | |[:white_check_mark:](2022/10/rust)|
 | [11](2022/11) | |[:white_check_mark:](2022/11/java)| | |[:white_check_mark:](2022/11/rust)|
 | [12](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)|
-| [13](2022/13) | | | | | |
+| [13](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)|
