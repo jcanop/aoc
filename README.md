@@ -4,9 +4,6 @@
 
 The repository is organized by year and then by day. Each day, there is a copy of the two parts puzzle and their solutions in various programming languages.
 
-## git_hooks
-| Day | bash | java | javascript | python | rust |
-|:---:|:---:|:---:|:---:|:---:|:---:|
 ## 2022
 | Day | bash | java | javascript | python | rust |
 |:---:|:---:|:---:|:---:|:---:|:---:|

@@ -14,7 +14,7 @@ The repository is organized by year and then by day. Each day, there is a copy o
 
 
 base=$(pwd)
-for year in $(ls -rd */); do
+for year in $(ls -rd 2*/); do
 	year=${year%"/"}
 	echo "## $year"
 	echo -n "| Day |"
