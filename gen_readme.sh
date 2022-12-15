@@ -17,13 +17,13 @@ base=$(pwd)
 for year in $(ls -rd 2*/); do
 	year=${year%"/"}
 	echo "## $year"
-	echo -n "| Day |"
+	echo -n "|     |"
 	for lang in "${LANGS[@]}"; do
 		echo -n " $lang |"
 	done
-	echo -n " comments |"
+	echo -n " Comments |"
 	echo ""
-	echo -n "|:---:|"
+	echo -n "|:----|"
 	for lang in "${LANGS[@]}"; do
 		echo -n ":---:|"
 	done
@@ -33,7 +33,13 @@ for year in $(ls -rd 2*/); do
 	pushd $year > /dev/null
 	for day in $(ls -d */); do
 		day=${day%"/"}
-		echo -n "| [$day]($year/$day) |"
+		file="$base/$year/$day/README.md"
+		if [ -f "$file" ]; then
+			title=$(grep -e "^# Day" $file)
+			echo -n "| [${title:2}]($year/$day) |"
+		else
+			echo -n "| [Day $day]($year/$day) |"
+		fi
 		for lang in "${LANGS[@]}"; do
 			dir="$base/$year/$day/$lang"
 			if [ -d "$dir" ] && [ -n "$(ls -A $dir)" ]; then
