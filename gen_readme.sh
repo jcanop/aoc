@@ -21,11 +21,13 @@ for year in $(ls -rd 2*/); do
 	for lang in "${LANGS[@]}"; do
 		echo -n " $lang |"
 	done
+	echo -n " comments |"
 	echo ""
 	echo -n "|:---:|"
 	for lang in "${LANGS[@]}"; do
 		echo -n ":---:|"
 	done
+	echo -n ":---:|"
 	echo ""
 
 	pushd $year > /dev/null
@@ -41,6 +43,14 @@ for year in $(ls -rd 2*/); do
 			fi
 			echo -n "|"
 		done
+		file="$base/$year/$day/comments.md"
+		if [ -f "$file" ]; then
+			comments=$(cat $file)
+			echo -n " $comments "
+		else
+			echo -n "${NO}"
+		fi
+		echo -n "|"
 		echo ""
 	done
 	popd > /dev/null
