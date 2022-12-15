@@ -21,7 +21,7 @@ for year in $(ls -rd 2*/); do
 	for lang in "${LANGS[@]}"; do
 		echo -n " $lang |"
 	done
-	echo -n " Comments |"
+	echo -n " comments |"
 	echo ""
 	echo -n "|:----|"
 	for lang in "${LANGS[@]}"; do
