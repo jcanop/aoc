@@ -62,11 +62,15 @@ public class Map {
 	}
 
 	public Tile get(int x, int y) {
-		if (x == ORIGIN.x && y == ORIGIN.y) return Tile.ORIGIN;
+		if (y == height - 1) return Tile.ROCK;
 		pointer.x = x;
 		pointer.y = y;
 		Tile tile = data.get(pointer);
-		if (tile == null) return Tile.AIR;
+		if (tile == null) {
+			if (x == ORIGIN.x && y == ORIGIN.y) return Tile.ORIGIN;
+			return Tile.AIR;
+		}
+
 		return tile;
 	}
 
@@ -74,17 +78,17 @@ public class Map {
 		return data.values().stream().filter(x -> x == Tile.SAND).count();
 	}
 
-	public void simulate() {
+	public void simulate(int puzzle) {
 		while (true) {
 			int x = ORIGIN.x;
 			int y = ORIGIN.y;
 			while (true) {
-	//System.out.println("=> " + x + ", " + y);
-				if (y + 1 == height + 1) return;
+				if (puzzle == 1 && y + 1 == height - 1) return;
 				if (get(x, y + 1) == Tile.AIR) { y++; continue; }
 				if (get(x - 1, y + 1) == Tile.AIR) { y++; x--; continue; }
 				if (get(x + 1, y + 1) == Tile.AIR) { y++; x++; continue; }
 				data.put(new Point(x, y), Tile.SAND);
+				if (x == ORIGIN.x && y == ORIGIN.y) return;
 				break;
 			}
 		}
@@ -105,8 +109,7 @@ public class Map {
 		for (int y = 0; y < height; y++) {
 			sb.append('|');
 			for (int x = min; x < max; x++) {
-				if (y < height - 1) sb.append(get(x, y).display());
-				else sb.append(Tile.ROCK.display());
+				sb.append(get(x, y).display());
 			}
 			sb.append("|\n");
 		}
