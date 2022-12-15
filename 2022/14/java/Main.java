@@ -5,8 +5,9 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Map map = Map.load(INPUT_FILE);
-		int total = map.simulate();
+		map.simulate();
 		System.out.println(map.toString());
+		long total = map.countSandTiles();
 		System.out.format("1. Total units of sand: %,d%n", total);
 	}
 }
