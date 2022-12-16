@@ -19,6 +19,6 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 10: Cathode-Ray Tube](2022/10) | |[:white_check_mark:](2022/10/java)| | |[:white_check_mark:](2022/10/rust)| |
 | [Day 11: Monkey in the Middle](2022/11) | |[:white_check_mark:](2022/11/java)| | |[:white_check_mark:](2022/11/rust)| Regex Groups |
 | [Day 12: Hill Climbing Algorithm](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)| [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Pathfinding#Dijkstra's_algorithm) |
-| [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| |
+| [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| Comparing and Ordering |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)| | |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
-| [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)| | | | [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |
+| [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)| | |[:white_check_mark:](2022/15/rust)| [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |
