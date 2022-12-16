@@ -13,11 +13,11 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 4: Camp Cleanup](2022/04) |[:white_check_mark:](2022/04/bash)|[:white_check_mark:](2022/04/java)|[:white_check_mark:](2022/04/javascript)| |[:white_check_mark:](2022/04/rust)| |
 | [Day 5: Supply Stacks](2022/05) | |[:white_check_mark:](2022/05/java)|[:white_check_mark:](2022/05/javascript)| |[:white_check_mark:](2022/05/rust)| |
 | [Day 6: Tuning Trouble](2022/06) |[:white_check_mark:](2022/06/bash)|[:white_check_mark:](2022/06/java)|[:white_check_mark:](2022/06/javascript)| |[:white_check_mark:](2022/06/rust)| |
-| [Day 7: No Space Left On Device](2022/07) | |[:white_check_mark:](2022/07/java)|[:white_check_mark:](2022/07/javascript)| |[:white_check_mark:](2022/07/rust)| |
+| [Day 7: No Space Left On Device](2022/07) | |[:white_check_mark:](2022/07/java)|[:white_check_mark:](2022/07/javascript)| |[:white_check_mark:](2022/07/rust)| Trees |
 | [Day 8: Treetop Tree House](2022/08) | |[:white_check_mark:](2022/08/java)|[:white_check_mark:](2022/08/javascript)| |[:white_check_mark:](2022/08/rust)| |
 | [Day 9: Rope Bridge](2022/09) | |[:white_check_mark:](2022/09/java)| | |[:white_check_mark:](2022/09/rust)| |
 | [Day 10: Cathode-Ray Tube](2022/10) | |[:white_check_mark:](2022/10/java)| | |[:white_check_mark:](2022/10/rust)| |
-| [Day 11: Monkey in the Middle](2022/11) | |[:white_check_mark:](2022/11/java)| | |[:white_check_mark:](2022/11/rust)| |
+| [Day 11: Monkey in the Middle](2022/11) | |[:white_check_mark:](2022/11/java)| | |[:white_check_mark:](2022/11/rust)| Regex Groups |
 | [Day 12: Hill Climbing Algorithm](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)| [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Pathfinding#Dijkstra's_algorithm) |
 | [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)| | |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
