@@ -6,7 +6,7 @@ The repository is organized by year and then by day. Each day, there is a copy o
 
 ## 2022
 |     | bash | java | javascript | python | rust | comments |
-|:----|:---:|:---:|:---:|:---:|:---:|:---:|
+|:----|:---:|:---:|:---:|:---:|:---:|:----|
 | [Day 1: Calorie Counting](2022/01) |[:white_check_mark:](2022/01/bash)|[:white_check_mark:](2022/01/java)|[:white_check_mark:](2022/01/javascript)|[:white_check_mark:](2022/01/python)|[:white_check_mark:](2022/01/rust)| |
 | [Day 2: Rock Paper Scissors](2022/02) |[:white_check_mark:](2022/02/bash)|[:white_check_mark:](2022/02/java)|[:white_check_mark:](2022/02/javascript)| |[:white_check_mark:](2022/02/rust)| |
 | [Day 3: Rucksack Reorganization](2022/03) |[:white_check_mark:](2022/03/bash)|[:white_check_mark:](2022/03/java)|[:white_check_mark:](2022/03/javascript)| |[:white_check_mark:](2022/03/rust)| |
@@ -18,7 +18,7 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 9: Rope Bridge](2022/09) | |[:white_check_mark:](2022/09/java)| | |[:white_check_mark:](2022/09/rust)| |
 | [Day 10: Cathode-Ray Tube](2022/10) | |[:white_check_mark:](2022/10/java)| | |[:white_check_mark:](2022/10/rust)| |
 | [Day 11: Monkey in the Middle](2022/11) | |[:white_check_mark:](2022/11/java)| | |[:white_check_mark:](2022/11/rust)| |
-| [Day 12: Hill Climbing Algorithm](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)| |
+| [Day 12: Hill Climbing Algorithm](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)| [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Pathfinding#Dijkstra's_algorithm) |
 | [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)| | |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
 | [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)| | | | [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |

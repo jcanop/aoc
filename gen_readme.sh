@@ -27,7 +27,7 @@ for year in $(ls -rd 2*/); do
 	for lang in "${LANGS[@]}"; do
 		echo -n ":---:|"
 	done
-	echo -n ":---:|"
+	echo -n ":----|"
 	echo ""
 
 	pushd $year > /dev/null
