@@ -21,3 +21,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 12: Hill Climbing Algorithm](2022/12) | |[:white_check_mark:](2022/12/java)|[:white_check_mark:](2022/12/javascript)| |[:white_check_mark:](2022/12/rust)| |
 | [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)| | |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
+| [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)| | | | [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |
