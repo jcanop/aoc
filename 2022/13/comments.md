@@ -1,1 +1,1 @@
-Comparing and Ordering
+Ordering
