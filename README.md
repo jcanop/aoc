@@ -22,3 +22,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)| | |[:white_check_mark:](2022/13/rust)| Ordering |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)| | |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
 | [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)| | |[:white_check_mark:](2022/15/rust)| [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |
+| [Day 16: Proboscidea Volcanium](2022/16) | |[:white_check_mark:](2022/16/java)| | | | Depth-First Search & Floyd Warshall |
