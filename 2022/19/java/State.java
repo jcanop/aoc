@@ -7,7 +7,6 @@ public class State {
 	private final Blueprint bp;
 	private int[] robots;
 	private int[] materials;
-	private int[] maxCosts;
 	private int mask;
 	private int time;
 
@@ -16,15 +15,8 @@ public class State {
 		this.robots = new int[4];
 		this.robots[C.ORE] = 1;
 		this.materials = new int[4];
-		this.maxCosts = new int[3];
 		this.mask = 0;
 		this.time = 0;
-
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 4; j++) {
-				maxCosts[i] = Math.max(maxCosts[i], bp.getCosts(j)[i]);
-			}
-		}
 	}
 
 	public void mine() {
@@ -42,24 +34,21 @@ public class State {
 	}
 
 	public boolean shouldBuild(int robot, int limit) {
+		if (robot == C.GEODE) return true;
 		int m = 1 << robot;
 		if ((mask & m) == m) return false;
-		if (robot != C.GEODE && materials[robot] >= (limit - time) * maxCosts[robot]) return false;
+		int max = bp.getMaxCosts(robot);
+		if (materials[robot] >= (limit - time) * max) return false;
 		switch (robot) {
-			case C.ORE:
-				int max = Math.max(bp.getCosts(C.GEODE)[C.ORE], bp.getCosts(C.OBSIDIAN)[C.ORE]);
-				max = Math.max(max, bp.getCosts(C.CLAY)[C.ORE]);
-				max = Math.max(max, bp.getCosts(C.ORE)[C.ORE]);
-				return robots[C.ORE] < max;
+			case C.ORE: return robots[C.ORE] < max;
 			case C.CLAY: return robots[C.CLAY] < bp.getCosts(C.OBSIDIAN)[C.CLAY];
 			case C.OBSIDIAN: return robots[C.OBSIDIAN] < bp.getCosts(C.GEODE)[C.OBSIDIAN];
-			case C.GEODE: return true;
 			default: throw new RuntimeException("Usupported robot: " + robot);
 		}
 	}
 
-	public boolean shouldBuildSomething() {
-		for (int i = 3; i >= 0; i++) if (canBuild(i) || shouldBuild(i, time)) return true;
+	public boolean shouldBuildSomething(int limit) {
+		for (int i = 3; i >= 0; i--) if (canBuild(i) && shouldBuild(i, limit)) return true;
 		return false;
 	}
 
@@ -85,7 +74,6 @@ public class State {
 		State clone = new State(this.bp);
 		for (int i = 0; i < this.robots.length; i++) clone.robots[i] = this.robots[i];
 		for (int i = 0; i < this.materials.length; i++) clone.materials[i] = this.materials[i];
-		clone.maxCosts = this.maxCosts;
 		clone.time = this.time;
 		return clone;
 	}

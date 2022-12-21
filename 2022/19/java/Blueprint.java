@@ -14,6 +14,7 @@ public class Blueprint {
 
 	private final int id;
 	private final int[][] costs;
+	private int[] maxCosts;
 
 	public Blueprint(String line) {
 		this.costs = new int[4][3];
@@ -31,6 +32,13 @@ public class Blueprint {
 		this.costs[C.GEODE] = new int[3];
 		this.costs[C.GEODE][C.ORE] = Integer.parseInt(matcher.group(6));
 		this.costs[C.GEODE][C.OBSIDIAN] = Integer.parseInt(matcher.group(7));
+
+		this.maxCosts = new int[3];
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				this.maxCosts[i] = Math.max(maxCosts[i], costs[j][i]);
+			}
+		}
 	}
 
 	// --- Getters ---
@@ -40,5 +48,9 @@ public class Blueprint {
 
 	public int[] getCosts(int robot) {
 		return costs[robot];
+	}
+
+	public int getMaxCosts(int robot) {
+		return maxCosts[robot];
 	}
 }

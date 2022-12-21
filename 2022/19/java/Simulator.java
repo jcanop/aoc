@@ -25,7 +25,7 @@ public class Simulator {
 		while (list.size() > 0) {
 			State state = list.remove(0);
 
-			while (state.getTime() != time && !state.shouldBuildSomething()) state.mine();
+			while (state.getTime() != time && !state.shouldBuildSomething(time)) state.mine();
 			if (state.getTime() == time - 1) state.mine();
 
 			if (state.getTime() == time) {
