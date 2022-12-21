@@ -25,3 +25,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 16: Proboscidea Volcanium](2022/16) | |[:white_check_mark:](2022/16/java)| | | | [Depth-First Search](https://en.wikipedia.org/wiki/Depth-first_search) / [Floyd-Warshall](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) |
 | [Day 17: Pyroclastic Flow](2022/17) | |[:white_check_mark:](2022/17/java)| | | | [Tetris](https://en.wikipedia.org/wiki/Tetris) |
 | [Day 18: Boiling Boulders](2022/18) | |[:white_check_mark:](2022/18/java)| | | | [Voxel](https://en.wikipedia.org/wiki/Voxel) |
+| [Day 19: Not Enough Minerals](2022/19) | |[:white_check_mark:](2022/19/java)| | | | [RTS](https://en.wikipedia.org/wiki/Real-time_strategy) |
