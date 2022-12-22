@@ -1,6 +1,6 @@
 /**
- * Simple wrapper class fot the numbers in the list, this classes is needed
- * because numbers can repeat.
+ * Simple wrapper class for the numbers in the list, this classes is needed
+ * because numbers can repeat on the input file.
  */
 public class Item {
 	private static int INDEX = 0;

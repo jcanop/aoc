@@ -30,7 +30,7 @@ public class Main {
 		}
 	}
 
-	// --- Sum the 3 coordiantes ---
+	// --- Find and sum the 3 coordiantes ---
 	private static long sum(List<Item> list) {
 		Item zero = list.stream().filter(i -> i.getValue() == 0).findAny().get();
 		int i = list.indexOf(zero);
