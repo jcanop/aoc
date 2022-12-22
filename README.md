@@ -26,3 +26,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 17: Pyroclastic Flow](2022/17) | |[:white_check_mark:](2022/17/java)| | | | [Tetris](https://en.wikipedia.org/wiki/Tetris) |
 | [Day 18: Boiling Boulders](2022/18) | |[:white_check_mark:](2022/18/java)| | | | [Voxel](https://en.wikipedia.org/wiki/Voxel) |
 | [Day 19: Not Enough Minerals](2022/19) | |[:white_check_mark:](2022/19/java)| | |[:white_check_mark:](2022/19/rust)| [RTS](https://en.wikipedia.org/wiki/Real-time_strategy) |
+| [Day 20: Grove Positioning System](2022/20) | |[:white_check_mark:](2022/20/java)| | | | [Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) |
