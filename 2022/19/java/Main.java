@@ -42,6 +42,6 @@ public class Main {
 		for (SimThread thread: threads) thread.join();
 		total = 1;
 		for (SimThread thread: threads) total *= thread.getMax();
-		System.out.format("2. Total of multiply the first 3 blurprints mas values: %,d%n", total);
+		System.out.format("2. Total of multiply the first 3 blurprints max values: %,d%n", total);
 	}
 }
