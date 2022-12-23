@@ -28,3 +28,4 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 19: Not Enough Minerals](2022/19) | |[:white_check_mark:](2022/19/java)| | |[:white_check_mark:](2022/19/rust)| [RTS](https://en.wikipedia.org/wiki/Real-time_strategy) |
 | [Day 20: Grove Positioning System](2022/20) | |[:white_check_mark:](2022/20/java)| | | | [Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) |
 | [Day 21: Monkey Math](2022/21) | |[:white_check_mark:](2022/21/java)| | | | [Algebra](https://en.wikipedia.org/wiki/Algebra) |
+| [Day 22](2022/22) | |[:white_check_mark:](2022/22/java)| | | | |
