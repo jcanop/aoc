@@ -10,9 +10,15 @@ public class Main {
 		String[] parts = data.split("\\n\\n");
 
 		// --- Puzzle 1 ---
-		Map map = new Map(parts[0]);
+		Map map = new GridMap(parts[0]);
 		map.path(parts[1]);
 		long password = map.getPassword();
 		System.out.format("1. Password %,d%n", password);
+
+		// --- Puzzle 2 ---
+		map = new Cube50Map(parts[0]);
+		map.path(parts[1]);
+		password = map.getPassword();
+		System.out.format("2. Password %,d%n", password);
 	}
 }

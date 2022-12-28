@@ -2,24 +2,24 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Map {
+public abstract class Map {
 	// --- Constants ---
-	private static final char EMPTY = ' ';
-	private static final char OPEN = '.';
-	private static final char WALL = '#';
-	private static final char NORTH = '^';
-	private static final char EAST = '>';
-	private static final char SOUTH = 'V';
-	private static final char WEST = '<';
-	private static final char RIGHT = 'R';
-	private static final char LEFT = 'L';
+	protected static final char EMPTY = ' ';
+	protected static final char OPEN = '.';
+	protected static final char WALL = '#';
+	protected static final char NORTH = '^';
+	protected static final char EAST = '>';
+	protected static final char SOUTH = 'V';
+	protected static final char WEST = '<';
+	protected static final char RIGHT = 'R';
+	protected static final char LEFT = 'L';
 
-	private final char[][] grid;
-	private final int height;
-	private final int width;
-	private Point pointer;
-	private char direction;
-	private char[][] path;
+	protected final char[][] grid;
+	protected final int height;
+	protected final int width;
+	protected Point pointer;
+	protected char direction;
+	protected char[][] path;
 
 	public Map(String data) {
 		String[] lines = data.split("\\r?\\n");
@@ -49,26 +49,7 @@ public class Map {
 		}
 	}
 
-	private void move(int steps) {
-		int x = pointer.x;
-		int y = pointer.y;
-		while (steps > 0) {
-			switch (direction) {
-				case NORTH: y--; if (y < 0) y = height - 1;  break;
-				case SOUTH: y++; if (y == height - 1) y = 0; break;
-				case WEST: x--;  if (x < 0) x = width -1 ;   break;
-				case EAST: x++;  if (x == width - 1) x = 0;  break;
-				default: throw new IllegalArgumentException("" +direction);
-			}
-			if (grid[y][x] == WALL) return;
-			if (grid[y][x] == OPEN) {
-				steps--;
-				pointer.x = x;
-				pointer.y = y;
-				path[y][x] = direction;
-			}
-		}
-	}
+	protected abstract void move(int steps);
 
 	public void path(String s) {
 		path = new char[height][width];
@@ -78,6 +59,7 @@ public class Map {
 		Matcher matcher = pattern.matcher(s);
 		while (matcher.find()) {
 			String token = matcher.group(1);
+//System.out.println("- " + token);
 			if (token.matches("\\d+")) {
 				int steps = Integer.parseInt(token);
 				move(steps);
@@ -112,7 +94,7 @@ public class Map {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				char a = grid[y][x];
-				char b = path[y][x];
+				char b = path == null ? EMPTY : path[y][x];
 				if (b != EMPTY) System.out.print(path[y][x]);
 				else System.out.print(grid[y][x]);
 			}
