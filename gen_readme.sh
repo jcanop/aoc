@@ -61,3 +61,30 @@ for year in $(ls -rd 2*/); do
 	done
 	popd > /dev/null
 done
+
+echo '## Compile and Run the Code
+### Java
+```
+# Compile
+$ javac *.java -d build -Xlint
+
+# Run
+$ java -cp build Main
+```
+
+### Rust
+```
+# Compile with Cargo
+$ cargo build
+
+# Run with Cargo
+$ cargo run
+
+# Compile without Cargo
+$ rustc main.rs
+
+# Run without Cargo
+$ ./main
+```
+'
+

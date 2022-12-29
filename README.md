@@ -30,4 +30,29 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 21: Monkey Math](2022/21) | |[:white_check_mark:](2022/21/java)| | | | [Algebra](https://en.wikipedia.org/wiki/Algebra) |
 | [Day 22: Monkey Map](2022/22) | |[:white_check_mark:](2022/22/java)| | | | [Cube](https://en.wikipedia.org/wiki/Cube) |
 | [Day 23: Unstable Diffusion](2022/23) | |[:white_check_mark:](2022/23/java)| | | | Dynamic 2D Grid |
-| [Day 24: Blizzard Basin](2022/24) | |[:white_check_mark:](2022/24/java)| | | | |
+| [Day 24: Blizzard Basin](2022/24) | |[:white_check_mark:](2022/24/java)| | | | [Modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) |
+## Compile and Run the Code
+### Java
+```
+# Compile
+$ javac *.java -d build -Xlint
+
+# Run
+$ java -cp build Main
+```
+
+### Rust
+```
+# Compile with Cargo
+$ cargo build
+
+# Run with Cargo
+$ cargo run
+
+# Compile without Cargo
+$ rustc main.rs
+
+# Run without Cargo
+$ ./main
+```
+
