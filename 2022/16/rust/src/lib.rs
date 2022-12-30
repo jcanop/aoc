@@ -76,41 +76,42 @@ impl Layout {
         Ok(layout)
     }
 
-    pub fn get_flow(&self, set: &HashSet<String>) -> u64 {
-        set.iter().map(|x| self.flows.get(x).unwrap()).sum()
+    pub fn get_flow(&self, set: &HashSet<&str>) -> u64 {
+        set.iter().map(|x| self.flows.get(*x).unwrap()).sum()
     }
 
     // --- Depth First Search: Puzzle 1 ---
     pub fn dfs1(&self) -> u64 {
-        let mut open: HashSet<String> = HashSet::new();
+        let mut open: HashSet<&str> = HashSet::new();
         self.do_dfs1("AA", 0, 0, &mut open)
     }
 
-    fn do_dfs1(&self, current: &str, time: u64, total: u64, open: &mut HashSet<String>) -> u64 {
+    fn do_dfs1<'a>(&'a self, current: &str, time: u64, total: u64, open: &mut HashSet<&'a str>) -> u64 {
         let mut max = total + self.get_flow(open) * (30 - time);
         for next in &self.useful_valves {
-            if open.contains(next) { continue; }
+            if open.contains(next.as_str()) { continue; }
             let delta = self.all.get(current).unwrap().get(next).unwrap() + 1;
             if time + delta >= 30 { continue; }
             let new_total = total + delta * self.get_flow(open);
-            open.insert(next.to_owned());
+            open.insert(next);
             let value = self.do_dfs1(next, time + delta, new_total, open);
             if max < value { max = value; }
-            open.remove(next);
+            open.remove(next.as_str());
         }
         max
     }
 
     // --- Depth First Search: Puzzle 2 ---
     pub fn dfs2(&self) -> u64 {
-        let mut open: HashSet<String> = HashSet::new();
-        self.do_dfs2("AA", false, 0, 0, &mut open, &self.useful_valves)
+        let mut open: HashSet<&str> = HashSet::new();
+        let useful = self.useful_valves.iter().map(|x| x.as_str()).collect();
+        self.do_dfs2("AA", false, 0, 0, &mut open, &useful)
     }
 
-    fn do_dfs2(&self, current: &str, elephant: bool, time: u64, total: u64, open: &mut HashSet<String>, useful: &HashSet<String>) -> u64 {
+    fn do_dfs2<'a>(&'a self, current: &str, elephant: bool, time: u64, total: u64, open: &mut HashSet<&'a str>, useful: &HashSet<&'a str>) -> u64 {
         let mut max = total + self.get_flow(open) * (26 - time);
         if !elephant {
-            let mut new_candidates: HashSet<String> = useful.iter().map(|x| x.to_owned()).collect();
+            let mut new_candidates: HashSet<&'a str> = useful.iter().map(|x| *x).collect();
             for v in open.iter() { new_candidates.remove(v); }
             let mut new_open = HashSet::new();
             let max_elephant = self.do_dfs2("AA", true, 0, 0, &mut new_open, &new_candidates);
@@ -118,7 +119,7 @@ impl Layout {
         }
         for next in useful {
             if open.contains(next) { continue; }
-            let delta = self.all.get(current).unwrap().get(next).unwrap() + 1;
+            let delta = self.all.get(current).unwrap().get(*next).unwrap() + 1;
             if time + delta >= 26 { continue; }
             let new_total = total + delta * self.get_flow(open);
             open.insert(next.to_owned());
