@@ -55,11 +55,10 @@ pub struct State<'a> {
 
 impl<'a> State<'a> {
     pub fn new(bp: &'a Blueprint) -> Self {
-        let mut robots = [0;  4];
+        let robots = [1, 0, 0, 0];
         let materials = [0; 4];
         let mask = 0;
         let time = 0;
-        robots[ORE] = 1;
         Self { bp, robots, materials, mask, time }
     }
 
@@ -87,12 +86,12 @@ impl<'a> State<'a> {
             ORE => self.robots[ORE] < max,
             CLAY => self.robots[CLAY] < self.bp.costs[OBSIDIAN][CLAY],
             OBSIDIAN => self.robots[OBSIDIAN] < self.bp.costs[GEODE][OBSIDIAN],
-            _ => panic!("Insupported robot: {}", robot)
+            _ => panic!("Unsupported robot: {}", robot)
         }
     }
 
     pub fn should_build_something(&self, limit: u8) -> bool {
-        for i in (0..4).rev() {
+        for i in 0..4 {
             if self.can_build(i) && self.should_build(i, limit) { return true; }
         }
         false
