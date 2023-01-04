@@ -15,6 +15,6 @@ public class Main {
 		// --- Puzzle 2 ---
 		time = map.search(end, start, time);
 		time = map.search(start, end, time);
-		System.out.format("2. Minutes to reach the goal, go back ot the start, then reach de goal again: %,d%n", time);
+		System.out.format("2. Minutes to reach the goal, go back to the start, then reach the goal again: %,d%n", time);
 	}
 }
