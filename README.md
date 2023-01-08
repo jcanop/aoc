@@ -42,6 +42,12 @@ $ javac *.java -d build -Xlint
 $ java -cp build Main
 ```
 
+### Javascript
+```
+# Run
+$ node main.mjs
+```
+
 ### Rust
 ```
 # Compile with Cargo
