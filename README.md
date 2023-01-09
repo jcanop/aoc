@@ -22,7 +22,7 @@ The repository is organized by year and then by day. Each day, there is a copy o
 | [Day 13: Distress Signal](2022/13) | |[:white_check_mark:](2022/13/java)|[:white_check_mark:](2022/13/javascript)| |[:white_check_mark:](2022/13/rust)| Ordering |
 | [Day 14: Regolith Reservoir](2022/14) | |[:white_check_mark:](2022/14/java)|[:white_check_mark:](2022/14/javascript)| |[:white_check_mark:](2022/14/rust)| Dynamic 2D Grid |
 | [Day 15: Beacon Exclusion Zone](2022/15) | |[:white_check_mark:](2022/15/java)|[:white_check_mark:](2022/15/javascript)| |[:white_check_mark:](2022/15/rust)| [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) |
-| [Day 16: Proboscidea Volcanium](2022/16) | |[:white_check_mark:](2022/16/java)| | |[:white_check_mark:](2022/16/rust)| [Depth-First Search](https://en.wikipedia.org/wiki/Depth-first_search) / [Floyd-Warshall](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) |
+| [Day 16: Proboscidea Volcanium](2022/16) | |[:white_check_mark:](2022/16/java)|[:white_check_mark:](2022/16/javascript)| |[:white_check_mark:](2022/16/rust)| [Depth-First Search](https://en.wikipedia.org/wiki/Depth-first_search) / [Floyd-Warshall](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) |
 | [Day 17: Pyroclastic Flow](2022/17) | |[:white_check_mark:](2022/17/java)| | |[:white_check_mark:](2022/17/rust)| [Tetris](https://en.wikipedia.org/wiki/Tetris) |
 | [Day 18: Boiling Boulders](2022/18) | |[:white_check_mark:](2022/18/java)| | |[:white_check_mark:](2022/18/rust)| [Voxel](https://en.wikipedia.org/wiki/Voxel) |
 | [Day 19: Not Enough Minerals](2022/19) | |[:white_check_mark:](2022/19/java)| | |[:white_check_mark:](2022/19/rust)| [RTS](https://en.wikipedia.org/wiki/Real-time_strategy) |
