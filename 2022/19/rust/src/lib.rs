@@ -69,32 +69,21 @@ impl<'a> State<'a> {
         self.time += 1;
     }
 
-    pub fn can_build(&self, robot: usize) -> bool {
+    pub fn should_build(&self, robot: usize) -> bool {
+        // --- Check if we have enough materials ---
         for i in 0..3 {
             if self.materials[i] < self.bp.costs[robot][i] { return false; }
         }
-        true
-    }
 
-    pub fn should_build(&self, robot: usize, limit: u8) -> bool {
+        // --- Always build a Geode robot if we can ---
         if robot == GEODE { return true; }
+
+        // --- Check for bit mask ---
         let m = 1 << robot;
         if (self.mask & m) == m { return false; }
-        let max = self.bp.max_costs[robot];
-        if self.materials[robot] as u16 >= (limit - self.time) as u16 * max as u16 { return false; }
-        match robot {
-            ORE => self.robots[ORE] < max,
-            CLAY => self.robots[CLAY] < self.bp.costs[OBSIDIAN][CLAY],
-            OBSIDIAN => self.robots[OBSIDIAN] < self.bp.costs[GEODE][OBSIDIAN],
-            _ => panic!("Unsupported robot: {}", robot)
-        }
-    }
 
-    pub fn should_build_something(&self, limit: u8) -> bool {
-        for i in 0..4 {
-            if self.can_build(i) && self.should_build(i, limit) { return true; }
-        }
-        false
+        // --- We shouldn't build more robots than needed ---
+        self.robots[robot] < self.bp.max_costs[robot]
     }
 
     pub fn build(&mut self, robot: usize) {
