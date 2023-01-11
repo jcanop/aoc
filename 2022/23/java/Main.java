@@ -9,7 +9,7 @@ public class Main {
 		while(grove.sim()) {
 			if (round++ == 10) {
 				int total = grove.emptyCount();
-				System.out.format("1. Empty groud titles: %,d%n", total);
+				System.out.format("1. Empty groud tiles: %,d%n", total);
 			}
 		}
 		System.out.format("2. First round with no Elf moves: %,d %n", round);

@@ -138,7 +138,7 @@ impl Grove {
         (min_x, min_y, max_x, max_y)
     }
 
-    // --- Count the empty titles ---
+    // --- Count the empty tiles ---
     pub fn empty_count(&self) -> usize {
         let mut total = 0;
         let (min_x, min_y, max_x, max_y) = self.find_view_rect();

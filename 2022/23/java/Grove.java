@@ -182,7 +182,7 @@ public class Grove {
 	/**
 	 * Count the empty tiles on the View Rectangle
 	 *
-	 * @return the number of empty titles
+	 * @return the number of empty tiles
 	 */
 	public int emptyCount() {
 		int total = 0;

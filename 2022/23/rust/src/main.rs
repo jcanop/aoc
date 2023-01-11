@@ -10,7 +10,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     while grove.sim() {
         if round == 10 {
             let total = grove.empty_count();
-            println!("1. Empty ground titles: {}", total);
+            println!("1. Empty ground tiles: {}", total);
         }
         round += 1;
     }
