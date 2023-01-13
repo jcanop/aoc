@@ -78,6 +78,12 @@ $ java -cp build Main
 $ node main.mjs
 ```
 
+### Python
+```
+# Run
+$ python3 main.py
+```
+
 ### Rust
 ```
 # Compile with Cargo
