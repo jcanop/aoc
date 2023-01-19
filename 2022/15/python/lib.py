@@ -10,7 +10,7 @@ class Point:
         return self.x == other.x and self.y == other.y
 
     def __hash__(self):
-        return hash(str(self))
+        return 7 * self.x + 31 * self.y
 
 class Sensor:
     def __init__(self, x, y, bx, by):
@@ -23,13 +23,13 @@ class Sensor:
 
 class Map:
     def __init__(self):
-        self.sensors = {}
-        self.beacons = []
+        self.sensors = dict()
+        self.beacons = set()
         self.point = Point(0, 0)
 
     def add(self, sx, sy, bx, by):
         self.sensors[Point(sx, sy)] = Sensor(sx, sy, bx, by)
-        self.beacons.append(Point(bx, by))
+        self.beacons.add(Point(bx, by))
 
     def is_in_sensor_range(self, x, y):
         for p in self.sensors:
