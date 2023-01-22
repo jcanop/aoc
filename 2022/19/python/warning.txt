@@ -1,0 +1,1 @@
+This solution needs to be completed; in theory, the principal method works but runs so slow (45 min for one Blueprint). So I am saving this for the moment.

@@ -2,6 +2,7 @@
 
 LANGS=(bash java javascript python rust)
 OK=":white_check_mark:"
+WARNING=":warning:"
 NO=" "
 
 
@@ -43,7 +44,12 @@ for year in $(ls -rd 2*/); do
 		for lang in "${LANGS[@]}"; do
 			dir="$base/$year/$day/$lang"
 			if [ -d "$dir" ] && [ -n "$(ls -A $dir)" ]; then
-				echo -n "[$OK]($year/$day/$lang)"
+				if [ -f "$dir/warning.txt" ]; then
+					tp=$(cat $dir/warning.txt)
+					echo -n "[$WARNING]($year/$day/$lang \"$tp\")"
+				else
+					echo -n "[$OK]($year/$day/$lang)"
+				fi
 			else
 				echo -n "${NO}"
 			fi
