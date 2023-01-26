@@ -1,0 +1,264 @@
+#!/bin/bash
+#
+#  This script can test all de code to verify that everything is correct. It
+#  also accepts command line arguments if you only want to test by year, day,
+#  or language and define an output file name to store test stats.
+
+# --- Constants --
+LANGS=(bash java javascript python rust)
+WORK_BASE_DIR=/dev/shm
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ANSWERS=$(cat "$SCRIPT_DIR/test.json")
+
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+NORMAL="\033[0m"
+
+OK="OK"
+NOOP="NOOP"
+WARNING="??"
+ERROR="ERROR"
+
+# --- Compile the code ---
+function compile {
+	local lang=$1
+	if  [ "$lang" == "bash" ] || \
+		[ "$lang" == "javascript" ] || \
+		[ "$lang" == "python" ]; then
+		printf $NOOP
+		return 1
+	elif [ "$lang" == "java" ]; then
+		javac *.java -d build
+	elif [ "$lang" == "rust" ]; then
+		if [ -f "Cargo.toml" ]; then
+			cargo build --release --quiet
+		else
+			rustc -C opt-level=3 main.rs
+		fi
+	fi
+	printf $OK
+}
+
+# --- Execute the code ---
+function execute {
+	local lang=$1
+	if [ "$lang" == "bash" ]; then
+		echo -n $(./main.sh)
+	elif [ "$lang" == "java" ]; then
+		echo -n $(java -cp build Main)
+	elif [ "$lang" == "javascript" ]; then
+		echo -n $(node main.mjs)
+	elif [ "$lang" == "python" ]; then
+		echo -n $(python3 main.py)
+	elif [ "$lang" == "rust" ]; then
+		if [ -f "Cargo.toml" ]; then
+			echo -n $(cargo run --release --quiet)
+		else
+			echo -n $(./main)
+		fi
+	fi
+	if [ $? -ne 0 ]; then
+		echo "Fatal Error!"
+		exit 1
+	fi
+}
+
+# --- Checks the output and validate that is correct ---
+function test_result {
+	local output=$(echo "$1" | sed -r 's/,//g')
+	local answers=$2
+	if [ "$answers" == "null" ]; then
+		printf $WARNING
+		return 1
+	else
+		for answer in $(echo "$answers" | jq -r ".[]"); do
+			if [[ ! $output == *"$answer"* ]]; then
+				printf $ERROR
+				return 2
+			fi
+		done
+	fi
+	printf $OK
+}
+
+# --- Prints the result ---
+function print_result {
+	if [ "$1" == "$OK" ]; then
+		printf "$GREEN$OK$NORMAL   "
+	elif [ "$1" == "$NOOP" ]; then
+		printf "$GREEN$NOOP$NORMAL "
+	elif [ "$1" == "$WARNING" ]; then
+		printf "$YELLOW$WARNING$NORMAL   "
+	elif [ "$1" == "$ERROR" ]; then
+		printf "$RED$ERROR$NORMAL "
+	else
+		printf $1
+	fi
+}
+
+# --- Init the JSON stats file ---
+function init_json {
+	local now=$(date +%s)
+	local os=$(uname -r)
+	local arch=$(lscpu -J | jq '.lscpu[] | select(.field=="Architecture:")' | jq -r .data)
+	local model=$(lscpu -J | jq '.lscpu[] | select(.field=="Model name:")' | jq -r .data)
+	local cores=$(lscpu -J | jq '.lscpu[] | select(.field=="CPU(s):")' | jq -r .data)
+	local mem=$(free -h | head -n 2 | tail -n 1 | awk '{print $2}')
+	local v_bash=$(bash --version | head -n 1)
+	local v_java=$(java --version | grep Runtime)
+	local v_node=$(node --version)
+	local v_python=$(python3 --version)
+	local v_rust=$(rustc --version)
+
+	echo $(jq --null-input \
+		--argjson start $now \
+		--argjson tests "{}" \
+		--arg os $os \
+		--arg arch $arch \
+		--arg model "$model" \
+		--argjson cores $cores \
+		--arg mem $mem \
+		--arg v_bash "$v_bash" \
+		--arg v_java "$v_java" \
+		--arg v_node "$v_node" \
+		--arg v_python "$v_python" \
+		--arg v_rust "$v_rust" \
+		'{ "start": $start, "end": 0, "tests": $tests, vm: { "os":$os, "cpu": { "arch": $arch, "model": $model, "cores": $cores }, "ram": $mem }, "versions": { "bash": $v_bash, "java": $v_java, "node": $v_node, "python": $v_python, "rust": $v_rust }}')
+}
+
+# --- Prints the help ---
+function print_help {
+	echo "Script that tests all the code and generate the stats file."
+	echo ""
+	echo "Usage: $0 [options]"
+	echo ""
+	echo "Options:"
+	echo "  -d <DAY>     Filter by day"
+	echo "  -h           Print help"
+	echo "  -j           Prints the JSON stats"
+	echo "  -l <LANG>    Filter by languange"
+	echo "  -o <FILE>    Output filename"
+	echo "  -y <YEAR>    Filter by year"
+	exit 0
+}
+
+# --- Command line arguments ---
+while getopts "d:l:o:y:hj" opt; do
+	case "${opt}" in
+		d) FILTER_DAY=${OPTARG};;
+		j) PRINT_JSON="Y";;
+		l) FILTER_LANG=${OPTARG};;
+		o) OUTPUT_FILE=${OPTARG};;
+		y) FILTER_YEAR=${OPTARG};;
+		*) print_help;;
+	esac
+done
+
+# --- Main script ---
+JSON=$(init_json)
+
+pushd $SCRIPT_DIR > /dev/null
+cd ..
+base=$(pwd)
+
+for year in $(ls -rd 2*/); do
+	year=${year%"/"}
+	if [ "$FILTER_YEAR" != "" ] && [ "$FILTER_YEAR" != "$year" ]; then
+		continue;
+	fi
+
+	pushd $year > /dev/null
+	for day in $(ls -d */); do
+		day=${day%"/"}
+		if [ "$FILTER_DAY" != "" ] && [ "$FILTER_DAY" != "$day" ]; then
+			continue;
+		fi
+
+		echo "$year-$day"
+
+		# --- JSON ---
+		JSON=$(echo $JSON | jq ".tests += {\"$year-$day\": {}}")
+
+		# --- Create a temp working dir and copy the code files ---
+		WORK_DIR=`mktemp -d -p "$WORK_BASE_DIR"`
+		cp -r $day "$WORK_DIR"
+		pushd "$WORK_DIR/$day" > /dev/null
+
+		# --- Search for the expected answers ---
+		answers=$(echo $ANSWERS | jq -c ".answers.\"$year-$day\"")
+		for lang in "${LANGS[@]}"; do
+			if [ "$FILTER_LANG" != "" ] && [ "$FILTER_LANG" != "$lang" ]; then
+				continue;
+			fi
+
+			if [ -d $lang ] && [ ! -f "$lang/warning.txt" ]; then
+				printf "* %-12s " $lang
+				pushd $lang > /dev/null
+
+				# --- Compile ---
+				printf "Compile: "
+				compile_start=$(date +%s)
+				result=$(compile $lang)
+				compile_end=$(date +%s)
+				print_result $result
+				cjson=$(jq --null-input \
+					--arg result "$result" \
+					--argjson compile_start $compile_start \
+					--argjson compile_end $compile_end \
+					'{"result": $result, "start": $compile_start, "end": $compile_end}')
+
+				# --- Execute ---
+				printf "    Execute: "
+				execute_start=$(date +%s)
+				output=$(execute $lang)
+				execute_end=$(date +%s)
+				print_result $OK
+				ejson=$(jq --null-input \
+					--arg result "$result" \
+					--argjson execute_start $execute_start \
+					--argjson execute_end $execute_end \
+					'{"result": $result, "start": $execute_start, "end": $execute_end}')
+
+
+				# --- Test ---
+				printf "    Test: "
+				result=$(test_result "$output" "$answers")
+				print_result $result
+				echo ""
+
+				# --- JSON ---
+				tjson="{\"compile\": $cjson, \"execute\": $ejson, \"test\": \"$result\"}"
+				JSON=$(echo $JSON | jq ".tests.\"$year-$day\" += {\"$lang\": $tjson}")
+
+				popd > /dev/null
+			fi
+		done
+		echo ""
+
+		# --- Delete the temp dir ---
+		popd > /dev/null
+		rm -rf "$WORK_DIR"
+	done
+	popd > /dev/null
+done
+popd > /dev/null
+
+# --- JSON ---
+now=$(date +%s)
+JSON=$(echo $JSON | jq ".end |= $now")
+if [ "$PRINT_JSON" == "Y" ]; then
+	echo $JSON
+fi
+if [ "$OUTPUT_FILE" != "" ]; then
+	echo $JSON > $OUTPUT_FILE
+fi
+
+# --- Makes sure to cleanup before exit ---
+function cleanup {
+	if [ -d "$WORK_DIR" ]; then
+		rm -rf "$WORK_DIR"
+	fi
+}
+
+trap cleanup EXIT
