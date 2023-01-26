@@ -4,6 +4,8 @@
 
 The repository is organized by year and then by day. Each day, there is a copy of the two parts puzzle and their solutions in various programming languages.
 
+You can directly access the selected source code by clicking each green button on the table or read the puzzle description by clicking the puzzle name.
+
 ## 2022
 |     | bash | java | javascript | python | rust | comments |
 |:----|:---:|:---:|:---:|:---:|:---:|:----|
