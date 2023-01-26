@@ -13,6 +13,7 @@ ANSWERS=$(cat "$SCRIPT_DIR/test.json")
 RED="\033[1;31m"
 GREEN="\033[1;32m"
 YELLOW="\033[1;33m"
+WHITE="\033[1;37m"
 NORMAL="\033[0m"
 
 OK="OK"
@@ -58,10 +59,7 @@ function execute {
 			echo -n $(./main)
 		fi
 	fi
-	if [ $? -ne 0 ]; then
-		echo "Fatal Error!"
-		exit 1
-	fi
+	return $?
 }
 
 # --- Checks the output and validate that is correct ---
@@ -134,12 +132,15 @@ function print_help {
 	echo "Usage: $0 [options]"
 	echo ""
 	echo "Options:"
-	echo "  -d <DAY>     Filter by day"
+	echo "  -d <DAY>     Filter by days"
 	echo "  -h           Print help"
 	echo "  -j           Prints the JSON stats"
-	echo "  -l <LANG>    Filter by languange"
+	echo "  -l <LANG>    Filter by languanges"
 	echo "  -o <FILE>    Output filename"
-	echo "  -y <YEAR>    Filter by year"
+	echo "  -y <YEAR>    Filter by years"
+	echo ""
+	echo "Example: $0 -y 2022 -d 01,02 -l java"
+	echo ""
 	exit 0
 }
 
@@ -164,14 +165,14 @@ base=$(pwd)
 
 for year in $(ls -rd 2*/); do
 	year=${year%"/"}
-	if [ "$FILTER_YEAR" != "" ] && [ "$FILTER_YEAR" != "$year" ]; then
+	if [ "$FILTER_YEAR" != "" ] && [[ ! ",$FILTER_YEAR," == *",$year,"* ]]; then
 		continue;
 	fi
 
 	pushd $year > /dev/null
 	for day in $(ls -d */); do
 		day=${day%"/"}
-		if [ "$FILTER_DAY" != "" ] && [ "$FILTER_DAY" != "$day" ]; then
+		if [ "$FILTER_DAY" != "" ] && [[ ! ",$FILTER_DAY," == *",$day,"* ]]; then
 			continue;
 		fi
 
@@ -188,7 +189,7 @@ for year in $(ls -rd 2*/); do
 		# --- Search for the expected answers ---
 		answers=$(echo $ANSWERS | jq -c ".answers.\"$year-$day\"")
 		for lang in "${LANGS[@]}"; do
-			if [ "$FILTER_LANG" != "" ] && [ "$FILTER_LANG" != "$lang" ]; then
+			if [ "$FILTER_LANG" != "" ] && [[ ! ",$FILTER_LANG," == *",$lang,"* ]]; then
 				continue;
 			fi
 
@@ -213,7 +214,11 @@ for year in $(ls -rd 2*/); do
 				execute_start=$(date +%s)
 				output=$(execute $lang)
 				execute_end=$(date +%s)
-				print_result $OK
+				result=$OK
+				if [ $? -ne 0 ]; then
+					result=$ERROR
+				fi
+				print_result $result
 				ejson=$(jq --null-input \
 					--arg result "$result" \
 					--argjson execute_start $execute_start \
@@ -253,6 +258,37 @@ fi
 if [ "$OUTPUT_FILE" != "" ]; then
 	echo $JSON > $OUTPUT_FILE
 fi
+
+# --- Print Results ---
+echo ""
+echo "------------------------------------------------------------------"
+c1=0
+printf $WHITE
+printf "%-12s" "Language"
+printf $GREEN
+printf "  %16s" "OK"
+printf $YELLOW
+printf "  %16s" "WARNING"
+printf $RED
+printf "  %16s" "ERROR"
+printf $NORMAL
+echo ""
+echo "------------------------------------------------------------------"
+c1=0
+c2=0
+c3=0
+for lang in "${LANGS[@]}"; do
+	r1=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$OK" | wc -l)
+	r2=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$WARNING" | wc -l)
+	r2=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$ERROR" | wc -l)
+	printf "%-12s  %16d  %16d  %16d\n" $lang $r1 $r2 $r3
+	c1=$(($c1 + r1))
+	c2=$(($c2 + r2))
+	c3=$(($c3 + r3))
+done
+echo "------------------------------------------------------------------"
+printf "%-12s  %16d  %16d  %16d\n" "total" $c1 $c2 $c3
+
 
 # --- Makes sure to cleanup before exit ---
 function cleanup {
