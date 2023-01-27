@@ -214,11 +214,17 @@ for year in $(ls -rd 2*/); do
 				execute_start=$(date +%s)
 				output=$(execute $lang)
 				execute_end=$(date +%s)
-				result=$OK
 				if [ $? -ne 0 ]; then
 					result=$ERROR
+					print_result $ERROR
+				else
+					result=$OK
+					seconds=$(($execute_end - $execute_start))
+					duration=$(date -ud "@$seconds" +'%M:%S')
+					printf $GREEN
+					printf $duration
+					printf $NORMAL
 				fi
-				print_result $result
 				ejson=$(jq --null-input \
 					--arg result "$result" \
 					--argjson execute_start $execute_start \
@@ -288,6 +294,14 @@ for lang in "${LANGS[@]}"; do
 done
 echo "------------------------------------------------------------------"
 printf "%-12s  %16d  %16d  %16d\n" "total" $c1 $c2 $c3
+echo "------------------------------------------------------------------"
+
+# --- Test time ---
+stime=$(echo $JSON | jq .start)
+etime=$(echo $JSON | jq .end)
+seconds=$(( $etime - $stime ))
+ptime=$(date -ud "@$seconds" +'%H hours %M minutes %S seconds')
+printf "%-12s  %52s\n\n" "time" "$ptime"
 
 
 # --- Makes sure to cleanup before exit ---
