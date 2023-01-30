@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS=(bash java javascript python rust)
+LANGS=(bash c java javascript python rust)
 OK=":white_check_mark:"
 WARNING=":warning:"
 NO=" "
