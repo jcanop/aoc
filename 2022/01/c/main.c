@@ -3,8 +3,8 @@
 #include <string.h>
 
 // --- Constants ---
-const char INPUT_FILE[] = "../input/input.txt";
-const int LINE_MAX_LEN = 100;
+#define INPUT_FILE ("../input/input.txt")
+#define LINE_MAX_LEN (32U)
 
 // --- Main function ---
 int main(void) {
@@ -45,4 +45,6 @@ int main(void) {
 	// --- Puzzle 2 ---
 	int total = max[0] + max[1] + max[2];
 	printf("2. The top 3 Elves carrying the most Calories, are carrying %d Calories.\n", total);
+
+	return EXIT_SUCCESS;
 }
