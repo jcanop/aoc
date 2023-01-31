@@ -4,8 +4,8 @@
 #include "./lib.h"
 
 // --- Constants ---
-#define INPUT_FILE ("../input/input.txt")
-#define LINE_MAX_LEN (32U)
+#define INPUT_FILE "../input/input.txt"
+#define LINE_MAX_LEN 32U
 
 // --- Main function ---
 int main(void) {
