@@ -42,7 +42,7 @@ $ make build
 
 # Run
 $ make run
-``
+```
 
 ### Java
 ```
