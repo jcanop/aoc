@@ -6,5 +6,8 @@ build: main.c
 	mkdir -p $(OUT_DIR)
 	$(CC) -o $(OUT_DIR)/main main.c
 
+run: build
+	$(OUT_DIR)/main
+
 clean:
 	rm -rf $(OUT_DIR)
