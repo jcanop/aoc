@@ -5,7 +5,7 @@
 #  or language and define an output file name to store test stats.
 
 # --- Constants --
-LANGS=(bash java javascript python rust)
+LANGS=(bash c java javascript python rust)
 WORK_BASE_DIR=/dev/shm
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ANSWERS=$(cat "$SCRIPT_DIR/test.json")
@@ -29,6 +29,8 @@ function compile {
 		[ "$lang" == "python" ]; then
 		printf $NOOP
 		return 1
+	elif [ "$lang" == "c" ]; then
+		make -s build
 	elif [ "$lang" == "java" ]; then
 		javac *.java -d build
 	elif [ "$lang" == "rust" ]; then
@@ -46,6 +48,8 @@ function execute {
 	local lang=$1
 	if [ "$lang" == "bash" ]; then
 		echo -n $(./main.sh)
+	elif [ "$lang" == "c" ]; then
+		make run
 	elif [ "$lang" == "java" ]; then
 		echo -n $(java -cp build Main)
 	elif [ "$lang" == "javascript" ]; then
