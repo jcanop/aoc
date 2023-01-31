@@ -71,6 +71,15 @@ for year in $(ls -rd 2*/); do
 done
 
 echo '## Compile and Run the Code
+### C
+```
+# Compile (GCC is used but should work with others compilers)
+$ make build
+
+# Run
+$ make run
+``
+
 ### Java
 ```
 # Compile

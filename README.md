@@ -35,6 +35,15 @@ You can directly access the selected source code by clicking each green button o
 | [Day 24: Blizzard Basin](2022/24) | | |[:white_check_mark:](2022/24/java)|[:white_check_mark:](2022/24/javascript)|[:white_check_mark:](2022/24/python)|[:white_check_mark:](2022/24/rust)| [Modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) |
 | [Day 25: Full of Hot Air](2022/25) |[:white_check_mark:](2022/25/bash)| |[:white_check_mark:](2022/25/java)|[:white_check_mark:](2022/25/javascript)|[:white_check_mark:](2022/25/python)|[:white_check_mark:](2022/25/rust)| [Quinary](https://en.wikipedia.org/wiki/Quinary) |
 ## Compile and Run the Code
+### C
+```
+# Compile (GCC is used but should work with others compilers)
+$ make build
+
+# Run
+$ make run
+``
+
 ### Java
 ```
 # Compile
