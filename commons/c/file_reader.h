@@ -1,12 +1,13 @@
 #ifndef FILE_READER_H_
 #define FILE_READER_H_
 
-#define READ_BY_LINE_INIT(line, filename)\
+#define READ_BY_LINE_INIT(line, rows, filename)\
 	FILE* __FILE = fopen(filename, "r");\
 	if (__FILE == NULL) {\
 		fprintf(stderr, "Not able to open file: %s\n", filename);\
 		return EXIT_FAILURE;\
 	}\
+	size_t rows = 0;\
 	size_t __MAX = 0;\
 	size_t __COUNT = 0;\
 	while(1) {\
@@ -15,6 +16,7 @@
 			if (__MAX < __COUNT) __MAX = __COUNT;\
 			__COUNT = 0;\
 			if (c == EOF) break;\
+			rows++;\
 		} else {\
 			__COUNT++;\
 		}\

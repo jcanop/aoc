@@ -42,7 +42,8 @@ int get_priority(char c) {
 int main(void) {
 	int totals[] = { 0, 0 };
 
-	READ_BY_LINE_INIT(line, INPUT_FILE);
+	READ_BY_LINE_INIT(line, rows, INPUT_FILE);
+	printf("%zu\n", rows);
 	size_t len = sizeof(line);
 	char buffer1[len];
 	char buffer2[len];
