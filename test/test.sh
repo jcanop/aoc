@@ -7,6 +7,7 @@
 # --- Constants --
 LANGS=(bash c java javascript python rust)
 WORK_BASE_DIR=/dev/shm
+COMMONS_DIR="commons"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ANSWERS=$(cat "$SCRIPT_DIR/test.json")
 
@@ -168,6 +169,11 @@ done
 # --- Main script ---
 JSON=$(init_json)
 
+if [ -d "$WORK_BASE_DIR/$COMMONS_DIR" ]; then
+	rm -rf "$WORK_BASE_DIR/$COMMONS_DIR"
+fi
+cp -r "$SCRIPT_DIR/../$COMMONS_DIR" "$WORK_BASE_DIR"
+
 pushd $SCRIPT_DIR > /dev/null
 cd ..
 base=$(pwd)
@@ -271,6 +277,10 @@ for year in $(ls -rd 2*/); do
 	popd > /dev/null
 done
 popd > /dev/null
+
+if [ -d "$WORK_BASE_DIR/$COMMONS_DIR" ]; then
+	rm -rf "$WORK_BASE_DIR/$COMMONS_DIR"
+fi
 
 # --- JSON ---
 now=$(date +%s)
