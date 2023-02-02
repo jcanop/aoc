@@ -40,11 +40,14 @@ int find(char* s, int c) {
 
 // --- Main function ---
 int main(void) {
+	char* text;
 	READ_FULL(text, INPUT_FILE);
 	int p = find(text, C_PACKET);
 	printf("Part 1. Start-of-packet marker: %d\n", p);
 	int m = find(text, C_MESSAGE);
 	printf("Part 2. Start-of-message marker: %d\n", m);
+	free(text);
+	text = NULL;
 
 	return EXIT_SUCCESS;
 }

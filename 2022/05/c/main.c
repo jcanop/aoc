@@ -8,6 +8,9 @@
 // --- Constants ---
 #define INPUT_FILE "../input/input.txt"
 
+// --- File reader macro struct ---
+READ_BY_LINE_HEAD(file_t)
+
 // --- Queue Node ---
 struct node {
 	char c;
@@ -17,13 +20,14 @@ TAILQ_HEAD(head_s, node);
 
 // --- Find out how many stacks of crates are defined ---
 int find_stacks_count() {
+	READ_BY_LINE_INIT(file, file_t, INPUT_FILE);
+	char line[file.max];
 	int count = 0;
-	READ_BY_LINE_INIT(line, rows, INPUT_FILE);
-	READ_BY_LINE_WHILE(line);
+	READ_BY_LINE_WHILE(file, line)
 		int len = strlen(line) + 1;
 		count = len / 4;
 		break;
-	READ_BY_LINE_DONE();
+	READ_BY_LINE_DONE(file);
 	return count;
 }
 
@@ -83,9 +87,10 @@ int main(void) {
 			TAILQ_INIT(&heads[i][j]);
 
 	// --- Read and parse the input file ---
+	READ_BY_LINE_INIT(file, file_t, INPUT_FILE)
+	char line[file.max];
 	bool setup = true;
-	READ_BY_LINE_INIT(line, rows, INPUT_FILE);
-	READ_BY_LINE_WHILE(line);
+	READ_BY_LINE_WHILE(file, line)
 		if (setup) {
 			// --- Loads the containers into the queues ---
 			if (strlen(line) == 0) {
@@ -121,14 +126,14 @@ int main(void) {
 			char c = queue_pop(&heads[1][0]);
 			queue_add(&heads[1][to], c, true);
 		}
-	READ_BY_LINE_DONE();
+	READ_BY_LINE_DONE(file)
 
 	// --- Prints results ---
 	printf("1. Crates on the top of each stack: ");
-	for (i = 1; i < count; i++) printf("%c", TAILQ_FIRST(&heads[0][i])->c);
+	for (i = 1; i <= count; i++) printf("%c", TAILQ_FIRST(&heads[0][i])->c);
 	printf("\n");
 	printf("2. Crates on the top of each stack: ");
-	for (i = 1; i < count; i++) printf("%c", TAILQ_FIRST(&heads[1][i])->c);
+	for (i = 1; i <= count; i++) printf("%c", TAILQ_FIRST(&heads[1][i])->c);
 	printf("\n");
 
 	// --- Free queues ---

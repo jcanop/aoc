@@ -42,14 +42,14 @@ int get_priority(char c) {
 int main(void) {
 	int totals[] = { 0, 0 };
 
-	READ_BY_LINE_INIT(line, rows, INPUT_FILE);
-	printf("%zu\n", rows);
-	size_t len = sizeof(line);
-	char buffer1[len];
-	char buffer2[len];
+	READ_BY_LINE_HEAD(file_t)
+	READ_BY_LINE_INIT(file, file_t, INPUT_FILE);
+	char line[file.max];
+	char buffer1[file.max];
+	char buffer2[file.max];
 	int count = 0;
 
-	READ_BY_LINE_WHILE(line);
+	READ_BY_LINE_WHILE(file, line)
 		// --- Puzzle 1 ---
 		size_t len = strlen(line);
 		char* p1 = &line[0];
@@ -66,7 +66,7 @@ int main(void) {
 				totals[1] += get_priority(c);
 				break;
 		}
-	READ_BY_LINE_DONE();
+	READ_BY_LINE_DONE(file);
 
 	printf("Part 1. Total sum of the priorities: %d\n", totals[0]);
 	printf("Part 1. Total sum of the item types: %d\n", totals[1]);

@@ -1,59 +1,90 @@
 #ifndef FILE_READER_H_
 #define FILE_READER_H_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 //
 // Reads a file line by line
 //
-#define READ_BY_LINE_INIT(line, rows, filename)\
-	FILE* __FILE = fopen(filename, "r");\
-	if (__FILE == NULL) {\
+// Example:
+//
+// READ_BY_LINE_HEAD(file_t)
+// READ_BY_LINE_INIT(file, file_t, "input.txt")
+// char line[file.max];
+// READ_BY_LINE_WHILE(file, line)
+//     printf("%s\n", line);
+// READ_BY_LINE_DONE(file)
+//
+#define READ_BY_LINE_HEAD(type)\
+	struct type { FILE* file; size_t rows; size_t max; };
+
+#define READ_BY_LINE_INIT(name, type, filename)\
+	struct type name;\
+	name.file = fopen(filename, "r");\
+	if (name.file == NULL) {\
 		fprintf(stderr, "Not able to open file: %s\n", filename);\
 		return EXIT_FAILURE;\
 	}\
-	size_t rows = 0;\
-	size_t __MAX = 0;\
-	size_t __COUNT = 0;\
-	while(1) {\
-		int c = fgetc(__FILE);\
-		if (c == EOF || c == '\n') {\
-			if (__MAX < __COUNT) __MAX = __COUNT;\
-			__COUNT = 0;\
-			if (c == EOF) break;\
-			rows++;\
-		} else {\
-			__COUNT++;\
+	name.rows = 0;\
+	name.max = 0;\
+	{\
+		size_t count = 0;\
+		while(1) {\
+			int c = fgetc(name.file);\
+			if (c == EOF || c == '\n') {\
+				if (name.max < count) name.max = count;\
+				count = 0;\
+				if (c == EOF) break;\
+				name.rows++;\
+			} else {\
+				count++;\
+			}\
+		}\
+		name.max += 2;\
+		if (fseek(name.file, 0, SEEK_SET) != 0) {\
+			fprintf(stderr, "Not able to set position: 0\n");\
+			return EXIT_FAILURE;\
 		}\
 	}\
-	__MAX += 2;\
-	if (fseek(__FILE, 0, SEEK_SET) != 0) {\
-		fprintf(stderr, "Not able to set position: 0\n");\
-		return EXIT_FAILURE;\
-	}\
-	char line[__MAX];
 
-#define READ_BY_LINE_WHILE(line)\
-	while(fgets(line, __MAX, __FILE)) {\
+#define READ_BY_LINE_WHILE(name, line)\
+	while(fgets(line, name.max, name.file)) {\
 		line[strcspn(line, "\n")] = 0;
 
-#define READ_BY_LINE_DONE()\
+#define READ_BY_LINE_DONE(name)\
 	}\
-	fclose(__FILE);
+	fclose(name.file);\
 
 //
 // Reads a whole file into a string
 //
+// Example:
+//
+// char* text;
+// READ_FULL(text, "input.txt")
+// free(text);
+// text = NULL;
+//
 #define READ_FULL(text, filename)\
-	FILE* __FILE = fopen(filename, "r");\
-	if (__FILE == NULL) {\
+{\
+	if (text != NULL) {\
+		fprintf(stderr, "Text pointer must be NULL!");\
+		return EXIT_FAILURE;\
+	}\
+	FILE* file = fopen(filename, "r");\
+	if (file == NULL) {\
 		fprintf(stderr, "Not able to open file: %s\n", filename);\
 		return EXIT_FAILURE;\
 	}\
-	fseek(__FILE, 0, SEEK_END);\
-	long __FSIZE = ftell(__FILE);\
-	fseek(__FILE, 0, SEEK_SET);\
-	char text[__FSIZE + 1];\
-	fread(text, __FSIZE, 1, __FILE);\
-	fclose(__FILE);\
-	text[__FSIZE] = 0;
+	fseek(file, 0, SEEK_END);\
+	long fsize = ftell(file);\
+	fseek(file, 0, SEEK_SET);\
+	text = malloc(fsize + 1);\
+	fread(text, fsize, 1, file);\
+	fclose(file);\
+	text[fsize] = 0;\
+}\
 
 #endif /* FILE_READER_H_ */
