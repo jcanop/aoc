@@ -3,6 +3,9 @@
 #  This script can test all de code to verify that everything is correct. It
 #  also accepts command line arguments if you only want to test by year, day,
 #  or language and define an output file name to store test stats.
+#
+#  While the solutions should work on any UNIX-type system (Linux, MacOS, BSD,
+#  etc.) except for C, this script is only tested on Debian Linux.
 
 # --- Constants --
 LANGS=(bash c java javascript python rust)
@@ -21,6 +24,12 @@ OK="OK"
 NOOP="NOOP"
 WARNING="??"
 ERROR="ERROR"
+
+# --- Check if the base directory exists ---
+if [ ! -d "$WORK_BASE_DIR" ]; then
+	echo "Working directory not found!"
+	exit 1
+fi
 
 # --- Compile the code ---
 function compile {
