@@ -28,7 +28,7 @@ function compile {
 		[ "$lang" == "javascript" ] || \
 		[ "$lang" == "python" ]; then
 		printf $NOOP
-		return 1
+		return 0
 	elif [ "$lang" == "c" ]; then
 		make -s build
 	elif [ "$lang" == "java" ]; then
@@ -40,7 +40,12 @@ function compile {
 			rustc -C opt-level=3 main.rs
 		fi
 	fi
-	printf $OK
+	if [ $? -eq 0 ]; then
+		printf $OK
+	else
+		printf $ERROR
+	fi
+	return $?
 }
 
 # --- Execute the code ---
@@ -206,6 +211,7 @@ for year in $(ls -rd 2*/); do
 				compile_start=$(date +%s)
 				result=$(compile $lang)
 				compile_end=$(date +%s)
+				compile_ecode=$?
 				print_result $result
 				cjson=$(jq --null-input \
 					--arg result "$result" \
@@ -215,19 +221,26 @@ for year in $(ls -rd 2*/); do
 
 				# --- Execute ---
 				printf "    Execute: "
-				execute_start=$(date +%s)
-				output=$(execute $lang)
-				execute_end=$(date +%s)
-				if [ $? -ne 0 ]; then
-					result=$ERROR
-					print_result $ERROR
+				if [ $compile_ecode -eq 0 ]; then
+					execute_start=$(date +%s)
+					output=$(execute $lang)
+					execute_end=$(date +%s)
+					if [ $? -ne 0 ]; then
+						result=$ERROR
+						print_result $ERROR
+					else
+						result=$OK
+						seconds=$(($execute_end - $execute_start))
+						duration=$(date -ud "@$seconds" +'%M:%S')
+						printf $GREEN
+						printf $duration
+						printf $NORMAL
+					fi
 				else
-					result=$OK
-					seconds=$(($execute_end - $execute_start))
-					duration=$(date -ud "@$seconds" +'%M:%S')
-					printf $GREEN
-					printf $duration
-					printf $NORMAL
+					execute_start=$(date +%s)
+					result=$NOOP
+					print_result $result
+					execute_end=$(date +%s)
 				fi
 				ejson=$(jq --null-input \
 					--arg result "$result" \
@@ -288,9 +301,9 @@ c1=0
 c2=0
 c3=0
 for lang in "${LANGS[@]}"; do
-	r1=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$OK" | wc -l)
-	r2=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$WARNING" | wc -l)
-	r2=$(echo $JSON | jq ".tests[].$lang.execute.result" | grep "$ERROR" | wc -l)
+	r1=$(echo $JSON | jq ".tests[].$lang.test" | grep "$OK" | wc -l)
+	r2=$(echo $JSON | jq ".tests[].$lang.test" | grep "$WARNING" | wc -l)
+	r3=$(echo $JSON | jq ".tests[].$lang.test" | grep "$ERROR" | wc -l)
 	printf "%-12s  %16d  %16d  %16d\n" $lang $r1 $r2 $r3
 	c1=$(($c1 + r1))
 	c2=$(($c2 + r2))
