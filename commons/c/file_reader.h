@@ -1,6 +1,9 @@
 #ifndef FILE_READER_H_
 #define FILE_READER_H_
 
+//
+// Reads a file line by line
+//
 #define READ_BY_LINE_INIT(line, rows, filename)\
 	FILE* __FILE = fopen(filename, "r");\
 	if (__FILE == NULL) {\
@@ -35,5 +38,22 @@
 #define READ_BY_LINE_DONE()\
 	}\
 	fclose(__FILE);
+
+//
+// Reads a whole file into a string
+//
+#define READ_FULL(text, filename)\
+	FILE* __FILE = fopen(filename, "r");\
+	if (__FILE == NULL) {\
+		fprintf(stderr, "Not able to open file: %s\n", filename);\
+		return EXIT_FAILURE;\
+	}\
+	fseek(__FILE, 0, SEEK_END);\
+	long __FSIZE = ftell(__FILE);\
+	fseek(__FILE, 0, SEEK_SET);\
+	char text[__FSIZE + 1];\
+	fread(text, __FSIZE, 1, __FILE);\
+	fclose(__FILE);\
+	text[__FSIZE] = 0;
 
 #endif /* FILE_READER_H_ */
