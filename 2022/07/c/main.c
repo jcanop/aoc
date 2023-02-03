@@ -31,6 +31,10 @@ struct node* create_root() {
 		fprintf(stderr, "Malloc failed!");
 		exit(EXIT_FAILURE);
 	}
+	n->parent = NULL;
+	n->name = strdup("[root]");
+	n->size = 0;
+	n->child_count = 0;
 	return n;
 }
 
@@ -50,6 +54,7 @@ struct node* add_child(struct node* parent, char* name, unsigned long size) {
 	n->parent = parent;
 	n->name = strdup(name);
 	n->size = size;
+	n->child_count = 0;
 
 	parent->childs[parent->child_count++] = n;
 	return n;
@@ -57,7 +62,10 @@ struct node* add_child(struct node* parent, char* name, unsigned long size) {
 
 // Free the moemory used by a node and all its childrens
 void do_free(struct node* n) {
-	int i; for (i = 0; i < n->child_count; i++) do_free(n->childs[i]);
+	int i; for (i = 0; i < n->child_count; i++) {
+		do_free(n->childs[i]);
+		n->childs[i] = NULL;
+	}
 	if (n->name != NULL) free(n->name);
 	free(n);
 }
@@ -65,7 +73,7 @@ void do_free(struct node* n) {
 // Private recursive method that prints the tree
 void _do_print(struct node* n, int ind) {
 	int i; for (i = 0; i < ind; i++) printf("-");
-	if (n->name != NULL) printf("%s", n->name);
+	printf("%s", n->name);
 	if (n->size > 0) printf(": %lu", n->size);
 	printf("\n");
 	for (i = 0; i < n->child_count; i++) _do_print(n->childs[i], ind + 1);
@@ -121,7 +129,7 @@ unsigned long find_puzzle_2(struct node* n, unsigned long need) {
 int main(void) {
 	// --- Regext ---
 	regex_t regex;
-	int rc = regcomp(&regex, "^[0-9]+", REG_EXTENDED);
+	int rc = regcomp(&regex, "^[0-9]+.*$", REG_EXTENDED);
 	if (rc != 0) {
 		fprintf(stderr, "Could not compile regex");
 		exit(EXIT_FAILURE);
@@ -150,6 +158,7 @@ int main(void) {
 			add_child(ptr, buffer, size);
 		}
 	READ_BY_LINE_DONE(file)
+	regfree(&regex);
 
 	// --- Update the tree dir sizes ---
 	update_dir_sizes(root);

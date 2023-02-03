@@ -138,7 +138,7 @@ int main(void) {
 
 	// --- Free queues ---
 	for (i = 0; i < 2; i++)
-		for (j = 0; j < count; j++)
+		for (j = 0; j <= count; j++)
 			queue_free(&heads[i][j]);
 
 	return EXIT_SUCCESS;
