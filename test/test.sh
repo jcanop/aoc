@@ -64,7 +64,7 @@ function execute {
 	if [ "$lang" == "bash" ]; then
 		echo -n $(./main.sh)
 	elif [ "$lang" == "c" ]; then
-		make run
+		echo -n $(make run)
 	elif [ "$lang" == "java" ]; then
 		echo -n $(java -cp build Main)
 	elif [ "$lang" == "javascript" ]; then
@@ -160,7 +160,6 @@ function print_help {
 	echo ""
 	echo "Example: $0 -y 2022 -d 01,02 -l java"
 	echo ""
-	exit 0
 }
 
 # --- Command line arguments ---
@@ -171,17 +170,51 @@ while getopts "d:l:o:y:hj" opt; do
 		l) FILTER_LANG=${OPTARG};;
 		o) OUTPUT_FILE=${OPTARG};;
 		y) FILTER_YEAR=${OPTARG};;
-		*) print_help;;
+		*) print_help; exit 0;;
 	esac
 done
 
-# --- Main script ---
-JSON=$(init_json)
+# --- Checks arguments ---
+if [ "$FILTER_YEAR" != "" ] && [[ ! $FILTER_YEAR =~ ^[0-9]{4}(,[0-9]{4})*$ ]]; then
+		printf "\n** Invalid filter years: $FILTER_YEAR **\n\n"
+		print_help
+		exit 1
+fi
+if [ "$FILTER_DAY" != "" ]; then
+	if [[ ! $FILTER_DAY =~ ^[0-9]{2}([-,][0-9]{2})*$ ]]; then
+		printf "\n** Invalid filter days: $FILTER_DAY **\n\n"
+		print_help
+		exit 1
+	fi
+	filter=""
+	while [[ $FILTER_DAY =~ (([0-9]+-)?[0-9]+) ]]; do
+		token="${BASH_REMATCH[1]}"
+		if [[ ${#token} -eq 5 ]]; then
+			a=$(( ${token:0:2} ))
+			b=$(( ${token:3} ))
+			for (( i=$a; i <=$b; i++ )); do
+				filter="$filter,"
+				if [[ $i -le 9 ]]; then
+					filter=$filter'0'
+				fi
+				filter="$filter$i"
+			done
+		else
+			filter="$filter,$token"
+		fi
+		FILTER_DAY=${FILTER_DAY##*${BASH_REMATCH[1]}}
+	done
+	FILTER_DAY=${filter:1}
+fi
 
+# --- Prepare working temporal directories ---
 if [ -d "$WORK_BASE_DIR/$COMMONS_DIR" ]; then
 	rm -rf "$WORK_BASE_DIR/$COMMONS_DIR"
 fi
 cp -r "$SCRIPT_DIR/../$COMMONS_DIR" "$WORK_BASE_DIR"
+
+# --- Main script ---
+JSON=$(init_json)
 
 pushd $SCRIPT_DIR > /dev/null
 cd ..
@@ -267,6 +300,12 @@ for year in $(ls -rd 2*/); do
 				# --- Test ---
 				printf "    Test: "
 				result=$(test_result "$output" "$answers")
+				if [ "$result" == "$OK" ] && [ "$lang" == "c" ]; then
+					valgrind --tool=memcheck --leak-check=full -s --error-exitcode=1 build/main > /dev/null 2>&1
+					if [ $? -ne 0 ]; then
+						result=$ERROR
+					fi
+				fi
 				print_result $result
 				echo ""
 
