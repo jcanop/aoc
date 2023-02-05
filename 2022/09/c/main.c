@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <file_reader.h>
-#include <set.h>
 
 // --- Constants ---
 #define INPUT_FILE "../input/input.txt"
@@ -61,19 +60,6 @@ void tree_add_knot(struct Node* node, struct Knot* knot) {
 		ptr = ptr->childs[idx];
 	}
 }
-
-/*
-bool tree_contains_knot(struct Node* node, struct Knot knot) {
-	knot_hash(knot);
-	struct Node* ptr = node;
-	for (int i = 0; i < SIZE * 2; i++) {
-		size_t idx = buffer[i] & 0xFF;
-		if (ptr->childs[idx] == NULL) return false;
-		ptr = ptr->childs[idx];
-	}
-	return true;
-}
-*/
 
 size_t tree_count(struct Node* node) {
 	if (node->child_count == 0) return 1;
