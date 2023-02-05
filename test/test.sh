@@ -190,8 +190,8 @@ if [ "$FILTER_DAY" != "" ]; then
 	while [[ $FILTER_DAY =~ (([0-9]+-)?[0-9]+) ]]; do
 		token="${BASH_REMATCH[1]}"
 		if [[ ${#token} -eq 5 ]]; then
-			a=$(( ${token:0:2} ))
-			b=$(( ${token:3} ))
+			a=$(( 10#${token:0:2} ))
+			b=$(( 10#${token:3} ))
 			for (( i=$a; i <=$b; i++ )); do
 				filter="$filter,"
 				if [[ $i -le 9 ]]; then
