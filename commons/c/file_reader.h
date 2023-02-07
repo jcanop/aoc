@@ -58,6 +58,31 @@
 	fclose(name.file);\
 
 //
+// Reads a full file into a single line.
+//
+// Example:
+//
+// READ_BY_LINE_HEAD(file_t)
+// READ_BY_LINE_INIT(file, file_t, "input.txt")
+// char* data;
+// READ_BY_LINE_FULL(name, data)
+// free(data); data = NULL;
+//
+#define READ_BY_LINE_FULL(name, data) {\
+	char line[name.max];\
+	size_t width = name.max - 2;\
+	size_t len = width * name.rows + 1;\
+	data = malloc(len);\
+	int row = 0;\
+	while(fgets(line, name.max, name.file)) {\
+		line[strcspn(line, "\n")] = 0;\
+		memcpy((data + row++ * width), line, width);\
+	}\
+	data[len - 1] = 0;\
+	fclose(name.file);\
+}
+
+//
 // Reads a whole file into a string
 //
 // Example:
