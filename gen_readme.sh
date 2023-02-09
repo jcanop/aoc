@@ -22,7 +22,11 @@ for year in $(ls -rd 2*/); do
 	echo "## $year"
 	echo -n "|     |"
 	for lang in "${LANGS[@]}"; do
-		echo -n " $lang |"
+		if [ "$lang" == "javascript" ]; then
+			echo -n " js |"
+		else
+			echo -n " $lang |"
+		fi
 	done
 	echo -n " comments |"
 	echo ""

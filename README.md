@@ -7,7 +7,7 @@ The repository is organized by year and then by day. Each day, there is a copy o
 You can directly access the selected source code by clicking each green button on the table or read the puzzle description by clicking the puzzle name.
 
 ## 2022
-|     | bash | c | java | javascript | python | rust | comments |
+|     | bash | c | java | js | python | rust | comments |
 |:----|:---:|:---:|:---:|:---:|:---:|:---:|:----|
 | [Day 1: Calorie Counting](2022/01) |[:white_check_mark:](2022/01/bash)|[:white_check_mark:](2022/01/c)|[:white_check_mark:](2022/01/java)|[:white_check_mark:](2022/01/javascript)|[:white_check_mark:](2022/01/python)|[:white_check_mark:](2022/01/rust)| |
 | [Day 2: Rock Paper Scissors](2022/02) |[:white_check_mark:](2022/02/bash)|[:white_check_mark:](2022/02/c)|[:white_check_mark:](2022/02/java)|[:white_check_mark:](2022/02/javascript)|[:white_check_mark:](2022/02/python)|[:white_check_mark:](2022/02/rust)| |
