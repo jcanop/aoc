@@ -11,7 +11,7 @@ run: build
 	$(OUT_DIR)/main
 
 valgrind: build
-	valgrind --tool=memcheck --leak-check=full -s $(OUT_DIR)/main
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes -s $(OUT_DIR)/main
 
 clean:
 	rm -rf $(OUT_DIR)

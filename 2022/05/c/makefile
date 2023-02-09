@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -I . -I ../../../commons/c -O3
+COMMONS = ../../../commons/c
+CFLAGS = -I . -I $(COMMONS) -O3
 OUT_DIR = build
 
 build: main.c
@@ -8,6 +9,9 @@ build: main.c
 
 run: build
 	$(OUT_DIR)/main
+
+valgrind: build
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes -s $(OUT_DIR)/main
 
 clean:
 	rm -rf $(OUT_DIR)
