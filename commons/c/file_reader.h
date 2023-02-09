@@ -70,15 +70,15 @@
 //
 #define READ_BY_LINE_FULL(name, data) {\
 	char line[name.max];\
-	size_t width = name.max - 2;\
-	size_t len = width * name.rows + 1;\
-	data = malloc(len);\
-	int row = 0;\
+	data = malloc((name.max - 2) * name.rows + 1);\
+	char* ptr = data;\
+	int len = 0;\
 	while(fgets(line, name.max, name.file)) {\
-		line[strcspn(line, "\n")] = 0;\
-		memcpy((data + row++ * width), line, width);\
+		len = strlen(line) - 1;\
+		memcpy(ptr, line, len);\
+		ptr += len;\
 	}\
-	data[len - 1] = 0;\
+	*ptr = 0; ptr = NULL;\
 	fclose(name.file);\
 }
 
