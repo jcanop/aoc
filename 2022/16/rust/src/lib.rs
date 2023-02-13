@@ -105,27 +105,31 @@ impl Layout {
     pub fn dfs2(&self) -> u64 {
         let mut open: HashSet<&str> = HashSet::new();
         let useful = self.useful_valves.iter().map(|x| x.as_str()).collect();
-        self.do_dfs2("AA", false, 0, 0, &mut open, &useful)
+        self.do_dfs2("AA", false, 0, 0, &mut open, &useful, 0)
     }
 
-    fn do_dfs2<'a>(&'a self, current: &str, elephant: bool, time: u64, total: u64, open: &mut HashSet<&'a str>, useful: &HashSet<&'a str>) -> u64 {
-        let mut max = total + self.get_flow(open) * (26 - time);
+    fn do_dfs2<'a>(&'a self, current: &str, elephant: bool, time: u64, total: u64, open: &mut HashSet<&'a str>, useful: &HashSet<&'a str>, total_flow: u64) -> u64 {
+        let mut total_flow = total_flow;
+        let mut max = total + total_flow * (26 - time);
         if !elephant {
             let mut new_candidates: HashSet<&'a str> = useful.iter().map(|x| *x).collect();
             for v in open.iter() { new_candidates.remove(v); }
             let mut new_open = HashSet::new();
-            let max_elephant = self.do_dfs2("AA", true, 0, 0, &mut new_open, &new_candidates);
-            max = total + self.get_flow(open) * (26 - time) + max_elephant;
+            let max_elephant = self.do_dfs2("AA", true, 0, 0, &mut new_open, &new_candidates, 0);
+            max = total + total_flow * (26 - time) + max_elephant;
         }
         for next in useful {
             if open.contains(next) { continue; }
             let delta = self.all.get(current).unwrap().get(*next).unwrap() + 1;
             if time + delta >= 26 { continue; }
-            let new_total = total + delta * self.get_flow(open);
+            let new_total = total + delta * total_flow;
             open.insert(next.to_owned());
-            let value = self.do_dfs2(next, elephant, time + delta, new_total, open, useful);
+            let next_flow = self.flows.get(*next).unwrap();
+            total_flow += next_flow;
+            let value = self.do_dfs2(next, elephant, time + delta, new_total, open, useful, total_flow);
             if max < value { max = value; }
             open.remove(next);
+            total_flow -= next_flow;
         }
         max
     }

@@ -79,24 +79,27 @@ class Layout:
     def dfs2(self):
         _open = set()
         useful = set(self.useful_valves)
-        return self._dfs2("AA", False, 0, 0, _open, useful)
+        return self._dfs2("AA", False, 0, 0, _open, useful, 0)
 
-    def _dfs2(self, current, elephant, time, total, _open, useful):
-        _max = total + self.get_flow(_open) * (26 - time)
+    def _dfs2(self, current, elephant, time, total, _open, useful, total_flow):
+        _max = total + total_flow * (26 - time)
         if elephant == False:
             new_candidates = set(useful)
             for  v in _open: new_candidates.remove(v)
             new_open = set()
-            max_elephant = self._dfs2("AA", True, 0, 0, new_open, new_candidates)
-            _max = total + self.get_flow(_open) * (26 - time) + max_elephant
+            max_elephant = self._dfs2("AA", True, 0, 0, new_open, new_candidates, 0)
+            _max = total + total_flow * (26 - time) + max_elephant
         for _next in useful:
             if _next in _open: continue
             delta = self.all[current][_next] + 1
             if time + delta >= 26: continue
-            new_total = total + delta * self.get_flow(_open)
+            new_total = total + delta * total_flow
             _open.add(_next)
-            value = self._dfs2(_next, elephant, time + delta, new_total, _open, useful)
+            next_flow = self.flows[_next]
+            total_flow += next_flow
+            value = self._dfs2(_next, elephant, time + delta, new_total, _open, useful, total_flow)
             _max = max(_max, value)
             _open.remove(_next)
+            total_flow -= next_flow
         return _max
 

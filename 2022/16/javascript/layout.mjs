@@ -31,7 +31,7 @@ function createLayout(filename) {
 	}
 
 	const dfs1 = function() { return DFS1(this, "AA", 0, 0, new Set()); }
-	const dfs2 = function() { return DFS2(this, "AA", false, 0, 0, new Set(), this.usefulValves); }
+	const dfs2 = function() { return DFS2(this, "AA", false, 0, 0, new Set(), this.usefulValves, 0); }
 
 	return { flows, usefulValves, all, getFlow, dfs1, dfs2 };
 }
@@ -87,25 +87,28 @@ function DFS1(map, current, time, total, open) {
 }
 
 // --- Depth First Search: Puzzle 2 ---
-function DFS2(map, current, elephant, time, total, open, useful) {
-	let max = total + map.getFlow(open) * (26 - time);
+function DFS2(map, current, elephant, time, total, open, useful, totalFlow) {
+	let max = total + totalFlow * (26 - time);
 	if (!elephant) {
 		let newCandidates = new Set(useful);
 		for (const v of open) newCandidates.delete(v);
 		let newOpen = new Set();
-		let maxElephant = DFS2(map, "AA", true, 0, 0, newOpen, newCandidates);
-		max = total + map.getFlow(open) * (26 - time) + maxElephant;
+		let maxElephant = DFS2(map, "AA", true, 0, 0, newOpen, newCandidates, 0);
+		max = total + totalFlow * (26 - time) + maxElephant;
 	}
 
 	for (const next of useful) {
 		if (open.has(next)) continue;
 		const delta = map.all[current][next] + 1;
 		if (time + delta >= 26) continue;
-		const newTotal = total + delta * map.getFlow(open);
+		const newTotal = total + delta * totalFlow
 		open.add(next);
-		const value = DFS2(map, next, elephant, time + delta, newTotal, open, useful);
+		const nextFlow = map.flows[next];
+		totalFlow += nextFlow;
+		const value = DFS2(map, next, elephant, time + delta, newTotal, open, useful, totalFlow);
 		if (max < value) max = value;
 		open.delete(next);
+		totalFlow -= nextFlow;
 	}
 	return max;
 }

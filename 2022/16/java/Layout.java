@@ -111,29 +111,32 @@ public class Layout {
 	// --- Depth First Search: Puzzle 2 ---
 	public long dfs2() {
 		Set<String> open = new HashSet<>();
-		return dfs2("AA", false, 0, 0, open, usefulValves);
+		return dfs2("AA", false, 0, 0, open, usefulValves, 0);
 	}
 
-	private long dfs2(String current, boolean elephant, long time, long total, Set<String> open, Set<String> useful) {
-		long max = total + getFlow(open) * (26 - time);
+	private long dfs2(String current, boolean elephant, long time, long total, Set<String> open, Set<String> useful, long totalFlow) {
+		long max = total + totalFlow * (26 - time);
 		if (!elephant) {
 			Set<String> newCandidates = new HashSet<>(useful);
 			for (String v: open) newCandidates.remove(v);
 
 			Set<String> newOpen = new HashSet<>();
-			long maxElephant = dfs2("AA", true, 0, 0, newOpen, newCandidates);
-			max = total + getFlow(open) * (26 - time) + maxElephant;
+			long maxElephant = dfs2("AA", true, 0, 0, newOpen, newCandidates, 0);
+			max = total + totalFlow * (26 - time) + maxElephant;
 		}
 
 		for (String next: useful) {
 			if (open.contains(next)) continue;
 			long delta = all.get(current).get(next) + 1;
 			if (time + delta >= 26) continue;
-			long newTotal = total + delta * getFlow(open);
+			long newTotal = total + delta * totalFlow;
 			open.add(next);
-			long value = dfs2(next, elephant, time + delta, newTotal, open, useful);
+			long nextFlow = flows.get(next).longValue();
+			totalFlow += nextFlow;
+			long value = dfs2(next, elephant, time + delta, newTotal, open, useful, totalFlow);
 			if (max < value) max = value;
 			open.remove(next);
+			totalFlow -= nextFlow;
 		}
 		return max;
 	}
