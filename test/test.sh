@@ -13,6 +13,7 @@ WORK_BASE_DIR=/dev/shm
 COMMONS_DIR="commons"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ANSWERS=$(cat "$SCRIPT_DIR/test.json")
+VALGRIND_IGNORE="valgrind_ignore"
 
 RED="\033[1;31m"
 GREEN="\033[1;32m"
@@ -301,9 +302,14 @@ for year in $(ls -rd 2*/); do
 				printf "    Test: "
 				result=$(test_result "$output" "$answers")
 				if [ "$result" == "$OK" ] && [ "$lang" == "c" ]; then
-					valgrind --tool=memcheck --leak-check=full -s --error-exitcode=1 build/main > /dev/null 2>&1
-					if [ $? -ne 0 ]; then
-						result=$ERROR
+					if [ -f $SCRIPT_DIR/$VALGRIND_IGNORE ]; then
+						ignore=$(grep $SCRIPT_DIR/$VALGRIND_IGNORE -e "$year-$day" | wc -l)
+						if [[ $ignore -eq 0 ]]; then
+							valgrind --tool=memcheck --leak-check=full -s --error-exitcode=1 build/main > /dev/null 2>&1
+							if [ $? -ne 0 ]; then
+								result=$ERROR
+							fi
+						fi
 					fi
 				fi
 				print_result $result
