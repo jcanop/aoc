@@ -4,11 +4,11 @@
 #include <lib.h>
 
 // --- Constants ---
-const Point SHAPE_0[4] = {{x: 0, y: 0}, {x: 1, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}};
-const Point SHAPE_1[5] = {{x: 1, y: 0}, {x: 0, y: 1}, {x: 1, y: 1}, {x: 2, y: 1}, {x: 1, y: 2}};
-const Point SHAPE_2[5] = {{x: 2, y: 0}, {x: 2, y: 1}, {x: 0, y: 2}, {x: 1, y: 2}, {x: 2, y: 2}};
-const Point SHAPE_3[4] = {{x: 0, y: 0}, {x: 0, y: 1}, {x: 0, y: 2}, {x: 0, y: 3}};
-const Point SHAPE_4[4] = {{x: 0, y: 0}, {x: 1, y: 0}, {x: 0, y: 1}, {x: 1, y: 1}};
+const Point SHAPE_0[4] = {{.x = 0, .y = 0}, {.x = 1, .y = 0}, {.x = 2, .y = 0}, {.x = 3, .y = 0}};
+const Point SHAPE_1[5] = {{.x = 1, .y = 0}, {.x = 0, .y = 1}, {.x = 1, .y = 1}, {.x = 2, .y = 1}, {.x = 1, .y = 2}};
+const Point SHAPE_2[5] = {{.x = 2, .y = 0}, {.x = 2, .y = 1}, {.x = 0, .y = 2}, {.x = 1, .y = 2}, {.x = 2, .y = 2}};
+const Point SHAPE_3[4] = {{.x = 0, .y = 0}, {.x = 0, .y = 1}, {.x = 0, .y = 2}, {.x = 0, .y = 3}};
+const Point SHAPE_4[4] = {{.x = 0, .y = 0}, {.x = 1, .y = 0}, {.x = 0, .y = 1}, {.x = 1, .y = 1}};
 
 // --- Functions ---
 Row* row_create_node(void) {

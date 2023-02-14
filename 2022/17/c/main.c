@@ -15,7 +15,7 @@ long sim(char* flows, long limit) {
 	long count = 0;
 	long rocks = 1;
 	long gcd = SHAPE_LEN * flows_len;
-	Chamber chamber = { root: row_create_node(), shape_len: 0 };
+	Chamber chamber = { .root = row_create_node(), .shape_len = 0 };
 	chamber_add_shape(&chamber, 0);
 
 	// --- Variables for tracking a pattern ---
