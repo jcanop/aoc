@@ -13,5 +13,9 @@ run: build
 valgrind: build
 	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes -s $(OUT_DIR)/main
 
+lib:
+	mkdir -p $(OUT_DIR)
+	$(CC) -o $(OUT_DIR)/libc.so $(CFLAGS) -fPIC -shared lib.c
+
 clean:
 	rm -rf $(OUT_DIR)

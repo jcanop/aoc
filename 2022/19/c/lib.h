@@ -28,6 +28,9 @@ typedef struct Queue {
 	State* tail;
 } Queue;
 
+// Prints a Blueprint in the console
+void blueprint_print(Blueprint* bp);
+
 // Get the max number of geodes produced for a blueprint
 int get_max(const Blueprint* bp, int limit);
 

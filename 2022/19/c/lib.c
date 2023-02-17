@@ -97,6 +97,19 @@ bool queue_empty(Queue* q) {
 	return (q->head == NULL);
 }
 
+// Prints a Blueprint in the console
+void blueprint_print(Blueprint* bp) {
+	printf("[Blueprint %d] costs: ", bp->id);
+	int i; for (i = 0; i < 4; i++) {
+		printf("[ ");
+		int j; for (j = 0; j < 3; j++) {
+			printf("%d ", bp->costs[i][j]);
+		}
+		printf("]");
+	}
+	printf(", max_ore: %d\n", bp->max_ore);
+}
+
 // Get the max number of geodes produced for a blueprint
 int get_max(const Blueprint* bp, int limit) {
 	Queue* queue = queue_create();
