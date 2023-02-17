@@ -1,4 +1,3 @@
-import numpy as np
 import re
 
 # --- Constants ---
@@ -16,10 +15,8 @@ REGEX = r"Blueprint (\d+):\s+Each ore robot costs (\d+) ore.\s+Each clay robot c
 class Blueprint:
     def __init__(self, cap):
         self.id = int(cap[0])
-        # self.costs = [ [0] * 3 for _ in range(4) ]
-        # self.max_costs = [0] * 3;
-        self.costs = np.array([ np.zeros(3), np.zeros(3), np.zeros(3), np.zeros(3) ])
-        self.max_costs = np.zeros(3)
+        self.costs = [ [0] * 3 for _ in range(4) ]
+        self.max_costs = [0] * 3;
         self.costs[ORE][ORE] = int(cap[1])
         self.costs[CLAY][ORE] = int(cap[2])
         self.costs[OBSIDIAN][ORE] = int(cap[3])
@@ -37,8 +34,7 @@ class Blueprint:
 
 # --- State ---
 def create_state():
-    # return array('B', [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-    return np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    return [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 def clone_state(state):
     a = create_state()
@@ -59,8 +55,8 @@ def should_build(state, bp, robot):
     if robot == GEODE: return True
 
     # --- Check for bit mask ---
-    m = i << robot
-    if state[MASK] & m == m: return False
+    m = (1 << robot)
+    if (state[MASK] & m) == m: return False
 
     # --- We shouldn't build more robots than needed ---
     return state[robot] < bp.max_costs[robot]
@@ -73,14 +69,9 @@ def build(state, bp, robot):
 def get_max(bp, limit):
     _max = 0
     queue = [ create_state() ]
-    prev = 0
 
     while len(queue) > 0:
         state = queue.pop(0)
-
-        if prev != state[TIME]:
-            print("\r" + str(state[TIME]), end="")
-            prev = state[TIME]
 
         if state[TIME] == limit:
             _max = max(_max, state[M + GEODE])
@@ -98,10 +89,9 @@ def get_max(bp, limit):
                 mine(clone)
                 build(clone, bp, i)
                 queue.append(clone)
-                state[MASK] |= 1 << i
+                state[MASK] |= (1 << i)
 
         mine(state)
         queue.append(state)
 
     return _max
-
