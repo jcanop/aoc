@@ -1,1 +1,0 @@
-Pure Python and Python/C solutions.
