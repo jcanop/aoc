@@ -32,7 +32,7 @@ You can directly access the selected source code by clicking each green button o
 | [Day 21: Monkey Math](2022/21) | |[:white_check_mark:](2022/21/c)|[:white_check_mark:](2022/21/java)|[:white_check_mark:](2022/21/javascript)|[:white_check_mark:](2022/21/python)|[:white_check_mark:](2022/21/rust)| [Algebra](https://en.wikipedia.org/wiki/Algebra) |
 | [Day 22: Monkey Map](2022/22) | |[:white_check_mark:](2022/22/c)|[:white_check_mark:](2022/22/java)|[:white_check_mark:](2022/22/javascript)|[:white_check_mark:](2022/22/python)|[:white_check_mark:](2022/22/rust)| [Cube](https://en.wikipedia.org/wiki/Cube) |
 | [Day 23: Unstable Diffusion](2022/23) | |[:white_check_mark:](2022/23/c)|[:white_check_mark:](2022/23/java)|[:white_check_mark:](2022/23/javascript)|[:white_check_mark:](2022/23/python)|[:white_check_mark:](2022/23/rust)| Dynamic 2D Grid |
-| [Day 24: Blizzard Basin](2022/24) | | |[:white_check_mark:](2022/24/java)|[:white_check_mark:](2022/24/javascript)|[:white_check_mark:](2022/24/python)|[:white_check_mark:](2022/24/rust)| [Modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) |
+| [Day 24: Blizzard Basin](2022/24) | |[:white_check_mark:](2022/24/c)|[:white_check_mark:](2022/24/java)|[:white_check_mark:](2022/24/javascript)|[:white_check_mark:](2022/24/python)|[:white_check_mark:](2022/24/rust)| [Modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) |
 | [Day 25: Full of Hot Air](2022/25) |[:white_check_mark:](2022/25/bash)| |[:white_check_mark:](2022/25/java)|[:white_check_mark:](2022/25/javascript)|[:white_check_mark:](2022/25/python)|[:white_check_mark:](2022/25/rust)| [Quinary](https://en.wikipedia.org/wiki/Quinary) |
 ## Compile and Run the Code
 ### C
