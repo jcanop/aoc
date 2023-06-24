@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS=(bash c java javascript python rust)
+LANGS=(ada bash c java javascript python rust)
 OK=":white_check_mark:"
 WARNING=":warning:"
 NO=" "
@@ -75,6 +75,16 @@ for year in $(ls -rd 2*/); do
 done
 
 echo '## Compile and Run the Code
+### Ada
+```
+# Compile (GNAT is used but should work with others compilers)
+$ mkdir -p build
+$ gnatmake -D build -o build/main *.ad*
+
+# Run
+$ build/main
+```
+
 ### C
 ```
 # Compile (GCC is used but should work with others compilers)

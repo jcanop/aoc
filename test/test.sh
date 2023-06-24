@@ -8,7 +8,7 @@
 #  etc.) except for C, this script is only tested on Debian Linux.
 
 # --- Constants --
-LANGS=(bash c java javascript python rust)
+LANGS=(ada bash c java javascript python rust)
 WORK_BASE_DIR=/dev/shm
 COMMONS_DIR="commons"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -40,6 +40,9 @@ function compile {
 		[ "$lang" == "python" ]; then
 		printf $NOOP
 		return 0
+	elif [ "$lang" == "ada" ]; then
+		mkdir -p build
+		gnatmake -q -D build -o build/main *.ad*
 	elif [ "$lang" == "c" ]; then
 		make -s build
 	elif [ "$lang" == "java" ]; then
@@ -62,7 +65,9 @@ function compile {
 # --- Execute the code ---
 function execute {
 	local lang=$1
-	if [ "$lang" == "bash" ]; then
+	if [ "$lang" == "ada" ]; then
+		echo -n $(build/main)
+	elif [ "$lang" == "bash" ]; then
 		echo -n $(./main.sh)
 	elif [ "$lang" == "c" ]; then
 		echo -n $(make run)
@@ -124,6 +129,8 @@ function init_json {
 	local cores=$(lscpu -J | jq '.lscpu[] | select(.field=="CPU(s):")' | jq -r .data)
 	local mem=$(free -h | head -n 2 | tail -n 1 | awk '{print $2}')
 	local v_bash=$(bash --version | head -n 1)
+	local v_gcc=$(gcc --version | head -n 1)
+	local v_gnat=$(gnatmake --version | head -n 1)
 	local v_java=$(java --version | grep Runtime)
 	local v_node=$(node --version)
 	local v_python=$(python3 --version)
@@ -138,11 +145,13 @@ function init_json {
 		--argjson cores $cores \
 		--arg mem $mem \
 		--arg v_bash "$v_bash" \
+		--arg v_gcc "$v_gcc" \
+		--arg v_gnat "$v_gnat" \
 		--arg v_java "$v_java" \
 		--arg v_node "$v_node" \
 		--arg v_python "$v_python" \
 		--arg v_rust "$v_rust" \
-		'{ "start": $start, "end": 0, "tests": $tests, vm: { "os":$os, "cpu": { "arch": $arch, "model": $model, "cores": $cores }, "ram": $mem }, "versions": { "bash": $v_bash, "java": $v_java, "node": $v_node, "python": $v_python, "rust": $v_rust }}')
+		'{ "start": $start, "end": 0, "tests": $tests, vm: { "os":$os, "cpu": { "arch": $arch, "model": $model, "cores": $cores }, "ram": $mem }, "versions": { "ada": $v_gnat, "bash": $v_bash, "c": $v_gcc, "java": $v_java, "node": $v_node, "python": $v_python, "rust": $v_rust }}')
 }
 
 # --- Prints the help ---
