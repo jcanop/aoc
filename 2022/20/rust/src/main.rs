@@ -30,9 +30,9 @@ fn mix (list: &mut Vec<Item>) {
 fn sum(list: &Vec<Item>) -> i64 {
     let i = list.iter().position(|x| x.1 == 0).unwrap();
     let len = list.len();
-    let x: i64 = list[((i + OFFSET_X) % len)].1 as i64;
-    let y: i64 = list[((i + OFFSET_Y) % len)].1 as i64;
-    let z: i64 = list[((i + OFFSET_Z) % len)].1 as i64;
+    let x: i64 = list[(i + OFFSET_X) % len].1 as i64;
+    let y: i64 = list[(i + OFFSET_Y) % len].1 as i64;
+    let z: i64 = list[(i + OFFSET_Z) % len].1 as i64;
     x + y + z
 }
 
