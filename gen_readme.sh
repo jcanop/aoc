@@ -41,6 +41,9 @@ for year in $(ls -rd 2*/); do
 	echo ""
 	echo -n "|:----|"
 	for lang in "${LANGS[@]}"; do
+		if [[ "${skip_langs[@]}" =~ "$lang" ]]; then
+			continue
+		fi
 		echo -n ":---:|"
 	done
 	echo -n ":----|"

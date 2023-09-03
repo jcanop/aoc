@@ -36,7 +36,7 @@ You can directly access the selected source code by clicking each green button o
 | [Day 25: Full of Hot Air](2022/25) | |[:white_check_mark:](2022/25/bash)|[:white_check_mark:](2022/25/c)|[:white_check_mark:](2022/25/java)|[:white_check_mark:](2022/25/javascript)|[:white_check_mark:](2022/25/python)|[:white_check_mark:](2022/25/rust)| [Quinary](https://en.wikipedia.org/wiki/Quinary) |
 ## 2015
 |     | js | rust | comments |
-|:----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:----|
+|:----|:---:|:---:|:----|
 | [Day 1: Not Quite Lisp](2015/01) |[:white_check_mark:](2015/01/javascript)|[:white_check_mark:](2015/01/rust)| |
 | [Day 2: I Was Told There Would Be No Math](2015/02) |[:white_check_mark:](2015/02/javascript)|[:white_check_mark:](2015/02/rust)| |
 | [Day 3: Perfectly Spherical Houses in a Vacuum](2015/03) |[:white_check_mark:](2015/03/javascript)|[:white_check_mark:](2015/03/rust)| |
