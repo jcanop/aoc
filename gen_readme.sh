@@ -19,9 +19,18 @@ You can directly access the selected source code by clicking each green button o
 base=$(pwd)
 for year in $(ls -rd 2*/); do
 	year=${year%"/"}
+	skip_langs=()
+	for lang in "${LANGS[@]}"; do
+		if [[ $(find $year -type d -name "$lang" | wc -l) -eq 0 ]]; then
+			skip_langs+=( $lang )
+		fi
+	done
 	echo "## $year"
 	echo -n "|     |"
 	for lang in "${LANGS[@]}"; do
+		if [[ "${skip_langs[@]}" =~ "$lang" ]]; then
+			continue
+		fi
 		if [ "$lang" == "javascript" ]; then
 			echo -n " js |"
 		else
@@ -48,6 +57,9 @@ for year in $(ls -rd 2*/); do
 			echo -n "| [Day $day]($year/$day) |"
 		fi
 		for lang in "${LANGS[@]}"; do
+			if [[ "${skip_langs[@]}" =~ "$lang" ]]; then
+				continue
+			fi
 			dir="$base/$year/$day/$lang"
 			if [ -d "$dir" ] && [ -n "$(ls -A $dir)" ]; then
 				if [ -f "$dir/warning.txt" ]; then
