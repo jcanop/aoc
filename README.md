@@ -35,33 +35,33 @@ You can directly access the selected source code by clicking each green button o
 | [Day 24: Blizzard Basin](2022/24) | | |[:white_check_mark:](2022/24/c)|[:white_check_mark:](2022/24/java)|[:white_check_mark:](2022/24/javascript)|[:white_check_mark:](2022/24/python)|[:white_check_mark:](2022/24/rust)| [Modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) |
 | [Day 25: Full of Hot Air](2022/25) | |[:white_check_mark:](2022/25/bash)|[:white_check_mark:](2022/25/c)|[:white_check_mark:](2022/25/java)|[:white_check_mark:](2022/25/javascript)|[:white_check_mark:](2022/25/python)|[:white_check_mark:](2022/25/rust)| [Quinary](https://en.wikipedia.org/wiki/Quinary) |
 ## 2015
-|     | js | rust | comments |
-|:----|:---:|:---:|:----|
-| [Day 1: Not Quite Lisp](2015/01) |[:white_check_mark:](2015/01/javascript)|[:white_check_mark:](2015/01/rust)| |
-| [Day 2: I Was Told There Would Be No Math](2015/02) |[:white_check_mark:](2015/02/javascript)|[:white_check_mark:](2015/02/rust)| |
-| [Day 3: Perfectly Spherical Houses in a Vacuum](2015/03) |[:white_check_mark:](2015/03/javascript)|[:white_check_mark:](2015/03/rust)| |
-| [Day 4: The Ideal Stocking Stuffer](2015/04) |[:white_check_mark:](2015/04/javascript)|[:white_check_mark:](2015/04/rust)| |
-| [Day 5: Doesn't He Have Intern-Elves For This?](2015/05) |[:white_check_mark:](2015/05/javascript)|[:white_check_mark:](2015/05/rust)| |
-| [Day 6: Probably a Fire Hazard](2015/06) |[:white_check_mark:](2015/06/javascript)|[:white_check_mark:](2015/06/rust)| |
-| [Day 7: Some Assembly Required](2015/07) |[:white_check_mark:](2015/07/javascript)|[:white_check_mark:](2015/07/rust)| |
-| [Day 8: Matchsticks](2015/08) |[:white_check_mark:](2015/08/javascript)|[:white_check_mark:](2015/08/rust)| |
-| [Day 9: All in a Single Night](2015/09) |[:white_check_mark:](2015/09/javascript)|[:white_check_mark:](2015/09/rust)| [Travelling salesman problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) |
-| [Day 10: Elves Look, Elves Say](2015/10) |[:white_check_mark:](2015/10/javascript)|[:white_check_mark:](2015/10/rust)| |
-| [Day 11: Corporate Policy](2015/11) |[:white_check_mark:](2015/11/javascript)|[:white_check_mark:](2015/11/rust)| |
-| [Day 12: JSAbacusFramework.io](2015/12) |[:white_check_mark:](2015/12/javascript)|[:white_check_mark:](2015/12/rust)| |
-| [Day 13: Knights of the Dinner Table](2015/13) |[:white_check_mark:](2015/13/javascript)|[:white_check_mark:](2015/13/rust)| |
-| [Day 14: Reindeer Olympics](2015/14) |[:white_check_mark:](2015/14/javascript)|[:white_check_mark:](2015/14/rust)| |
-| [Day 15: Science for Hungry People](2015/15) |[:white_check_mark:](2015/15/javascript)|[:white_check_mark:](2015/15/rust)| |
-| [Day 16: Aunt Sue](2015/16) |[:white_check_mark:](2015/16/javascript)|[:white_check_mark:](2015/16/rust)| |
-| [Day 17: No Such Thing as Too Much](2015/17) |[:white_check_mark:](2015/17/javascript)|[:white_check_mark:](2015/17/rust)| |
-| [Day 18: Like a GIF For Your Yard](2015/18) |[:white_check_mark:](2015/18/javascript)|[:white_check_mark:](2015/18/rust)| |
-| [Day 19: Medicine for Rudolph](2015/19) |[:white_check_mark:](2015/19/javascript)|[:white_check_mark:](2015/19/rust)| |
-| [Day 20: Infinite Elves and Infinite Houses](2015/20) |[:white_check_mark:](2015/20/javascript)|[:white_check_mark:](2015/20/rust)| |
-| [Day 21: RPG Simulator 20XX](2015/21) |[:white_check_mark:](2015/21/javascript)|[:white_check_mark:](2015/21/rust)| [RPG](https://en.wikipedia.org/wiki/Role-playing_video_game) |
-| [Day 22: Wizard Simulator 20XX](2015/22) |[:white_check_mark:](2015/22/javascript)|[:white_check_mark:](2015/22/rust)| |
-| [Day 23: Opening the Turing Lock](2015/23) |[:white_check_mark:](2015/23/javascript)|[:white_check_mark:](2015/23/rust)| |
-| [Day 24: It Hangs in the Balance](2015/24) |[:white_check_mark:](2015/24/javascript)|[:white_check_mark:](2015/24/rust)| |
-| [Day 25: Let It Snow](2015/25) |[:white_check_mark:](2015/25/javascript)|[:white_check_mark:](2015/25/rust)| |
+|     | js | python | rust | comments |
+|:----|:---:|:---:|:---:|:----|
+| [Day 1: Not Quite Lisp](2015/01) |[:white_check_mark:](2015/01/javascript)|[:white_check_mark:](2015/01/python)|[:white_check_mark:](2015/01/rust)| |
+| [Day 2: I Was Told There Would Be No Math](2015/02) |[:white_check_mark:](2015/02/javascript)|[:white_check_mark:](2015/02/python)|[:white_check_mark:](2015/02/rust)| |
+| [Day 3: Perfectly Spherical Houses in a Vacuum](2015/03) |[:white_check_mark:](2015/03/javascript)|[:white_check_mark:](2015/03/python)|[:white_check_mark:](2015/03/rust)| |
+| [Day 4: The Ideal Stocking Stuffer](2015/04) |[:white_check_mark:](2015/04/javascript)|[:white_check_mark:](2015/04/python)|[:white_check_mark:](2015/04/rust)| |
+| [Day 5: Doesn't He Have Intern-Elves For This?](2015/05) |[:white_check_mark:](2015/05/javascript)|[:white_check_mark:](2015/05/python)|[:white_check_mark:](2015/05/rust)| |
+| [Day 6: Probably a Fire Hazard](2015/06) |[:white_check_mark:](2015/06/javascript)|[:white_check_mark:](2015/06/python)|[:white_check_mark:](2015/06/rust)| |
+| [Day 7: Some Assembly Required](2015/07) |[:white_check_mark:](2015/07/javascript)|[:white_check_mark:](2015/07/python)|[:white_check_mark:](2015/07/rust)| |
+| [Day 8: Matchsticks](2015/08) |[:white_check_mark:](2015/08/javascript)|[:white_check_mark:](2015/08/python)|[:white_check_mark:](2015/08/rust)| |
+| [Day 9: All in a Single Night](2015/09) |[:white_check_mark:](2015/09/javascript)|[:white_check_mark:](2015/09/python)|[:white_check_mark:](2015/09/rust)| [Travelling salesman problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) |
+| [Day 10: Elves Look, Elves Say](2015/10) |[:white_check_mark:](2015/10/javascript)|[:white_check_mark:](2015/10/python)|[:white_check_mark:](2015/10/rust)| |
+| [Day 11: Corporate Policy](2015/11) |[:white_check_mark:](2015/11/javascript)|[:white_check_mark:](2015/11/python)|[:white_check_mark:](2015/11/rust)| |
+| [Day 12: JSAbacusFramework.io](2015/12) |[:white_check_mark:](2015/12/javascript)|[:white_check_mark:](2015/12/python)|[:white_check_mark:](2015/12/rust)| |
+| [Day 13: Knights of the Dinner Table](2015/13) |[:white_check_mark:](2015/13/javascript)|[:white_check_mark:](2015/13/python)|[:white_check_mark:](2015/13/rust)| |
+| [Day 14: Reindeer Olympics](2015/14) |[:white_check_mark:](2015/14/javascript)|[:white_check_mark:](2015/14/python)|[:white_check_mark:](2015/14/rust)| |
+| [Day 15: Science for Hungry People](2015/15) |[:white_check_mark:](2015/15/javascript)|[:white_check_mark:](2015/15/python)|[:white_check_mark:](2015/15/rust)| |
+| [Day 16: Aunt Sue](2015/16) |[:white_check_mark:](2015/16/javascript)|[:white_check_mark:](2015/16/python)|[:white_check_mark:](2015/16/rust)| |
+| [Day 17: No Such Thing as Too Much](2015/17) |[:white_check_mark:](2015/17/javascript)|[:white_check_mark:](2015/17/python)|[:white_check_mark:](2015/17/rust)| |
+| [Day 18: Like a GIF For Your Yard](2015/18) |[:white_check_mark:](2015/18/javascript)|[:white_check_mark:](2015/18/python)|[:white_check_mark:](2015/18/rust)| |
+| [Day 19: Medicine for Rudolph](2015/19) |[:white_check_mark:](2015/19/javascript)|[:white_check_mark:](2015/19/python)|[:white_check_mark:](2015/19/rust)| |
+| [Day 20: Infinite Elves and Infinite Houses](2015/20) |[:white_check_mark:](2015/20/javascript)|[:white_check_mark:](2015/20/python)|[:white_check_mark:](2015/20/rust)| |
+| [Day 21: RPG Simulator 20XX](2015/21) |[:white_check_mark:](2015/21/javascript)|[:white_check_mark:](2015/21/python)|[:white_check_mark:](2015/21/rust)| [RPG](https://en.wikipedia.org/wiki/Role-playing_video_game) |
+| [Day 22: Wizard Simulator 20XX](2015/22) |[:white_check_mark:](2015/22/javascript)|[:white_check_mark:](2015/22/python)|[:white_check_mark:](2015/22/rust)| |
+| [Day 23: Opening the Turing Lock](2015/23) |[:white_check_mark:](2015/23/javascript)|[:white_check_mark:](2015/23/python)|[:white_check_mark:](2015/23/rust)| |
+| [Day 24: It Hangs in the Balance](2015/24) |[:white_check_mark:](2015/24/javascript)|[:white_check_mark:](2015/24/python)|[:white_check_mark:](2015/24/rust)| |
+| [Day 25: Let It Snow](2015/25) |[:white_check_mark:](2015/25/javascript)|[:white_check_mark:](2015/25/python)|[:white_check_mark:](2015/25/rust)| |
 ## Compile and Run the Code
 ### Ada
 ```
