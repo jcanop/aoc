@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS=(ada bash c java javascript python rust)
+LANGS=(ada bash c go java javascript python rust)
 OK=":white_check_mark:"
 WARNING=":warning:"
 NO=" "
@@ -107,6 +107,12 @@ $ make build
 
 # Run
 $ make run
+```
+
+### Go
+```
+# Run
+$ go run main.go
 ```
 
 ### Java
